@@ -29,16 +29,16 @@ struct parere {
 struct persoana
 {
     char nume[55];
-    struct persoana *next;
+    struct persoana* next;
 };
 
-struct persoana *head = NULL;
+struct persoana* head = NULL;
 
 
 void utility_printData()
-{   
+{
     for (int i = 0; i <= 5; ++i)
-    {   
+    {
         printf("---------------------------------------\n\n");
         printf("Loc: ");
         printf("%s", p[i].loc);
@@ -66,7 +66,7 @@ void utility_printData()
 
         printf("Disponibilitate: ");
         printf(p[i].availability == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
-           
+
     }
 
     //if ((n+1) % 2) 
@@ -106,7 +106,7 @@ void utility_storeData()
     while (fgets(var, 150, locatii))
     {
         if (var[0] == '-') cnt++;
-        
+
         else
         {
             strcpy(p[cnt].loc, var);
@@ -136,9 +136,9 @@ void utility_storeData()
             p[cnt].availability = atoi(var);
         }
     }
-    
 
-   // utility_printData(cnt);
+
+    // utility_printData(cnt);
 
 }
 
@@ -224,6 +224,33 @@ void optiuni()
     // arata optiunile complete
 }
 
+void utility_Plata()
+{
+    system("cls");
+
+    printf("[1] Anularea procesului de plata\n");
+    printf("[2] Continua Plata\n\n");
+
+    int option = utility_readOption();
+
+    if (option == 1)  utility_exit();
+
+    char IBAN[40], cvv[40];
+    printf("Pentru confirmarea cazarii trebuie sa platiti online cu cardul si sa generati raportul de cazare\n");
+    printf("Neindeplinirea celor 2 pasi va duce la nealocarea cazarii si restituirea banilor \n\n");
+    printf("Introduceti IBAN: ");     scanf("%s", IBAN);
+
+    printf("\n");
+
+    printf("Introduceti codul de securitate(CVV): "); scanf("%s", cvv);
+    printf("\n");
+
+    printf("Plata se proceseaza...\n\n");
+    Sleep(3500);
+    printf("Plata efectuata cu succes\n\n");
+
+}
+
 void pareri_fosti_clienti()
 {
     system("clS");
@@ -244,7 +271,7 @@ void pareri_fosti_clienti()
     if (option == 2) utility_exit();
 }
 
-void generare_raport()
+void generare_raport(int i)
 {
     system("clS");
 
@@ -256,16 +283,34 @@ void generare_raport()
 
     if (option == 1)
     {
-        printf("Se incepe generarea raportului de cazare...");
+        printf("Se incepe generarea raportului de cazare...\n\n");
         Sleep(4500);
+
+        FILE* cazare = fopen("raport.txt", "w");
+        fprintf(cazare, "Persoane\n");
 
         struct persoana* temp = head;
 
+
         while (temp != NULL)
         {
-            printf("%s\n", (*temp).nume);
+            fprintf(cazare, "%s\n", (*temp).nume);
             temp = (*temp).next;
         }
+         
+        fprintf(cazare, "*****************************\n");
+        fprintf(cazare, "Locatie: %s", p[i].loc);
+        fprintf(cazare, "Nume Hotel: %s", p[i].nume);
+        fprintf(cazare, "ID: %i\n", p[i].id);
+        fprintf(cazare, "Pret: %f\n", p[i].price);
+        fprintf(cazare, "Locuri Ramase: %i\n", p[i].left);
+        fprintf(cazare, "Stele: %i\n", p[i].eval);
+        fprintf(cazare, "Medie Review-uri: %f\n", p[i].mean);
+        fprintf(cazare, "Numar Review-uri%i\n", p[i].reviews);
+        fprintf(cazare, "Disponibilitate: %s\n\n", p[i].availability == 0? "Nu este disponibil":"Este disponibil");
+        fprintf(cazare, "*****************************\n\n");
+
+        fclose(cazare);
 
 
     }
@@ -278,9 +323,15 @@ void generare_raport()
 
     else if (option == 3)  utility_exit();
 
+    printf("Raportul a fost generat, cazarea a fost facut, vom redirectiona catre meniul principal. Multumim!");
+    Sleep(4500);
+    system("cls");
 
-    // genereaza un fisier cu detaliile cazarii ce reprezinta dovada rezervarii si platirii sumei de bani
+}
 
+int utility_checkLeft(int persoane, int i)
+{
+    return ((p[i].left - persoane) > 0);
 }
 
 void vizualizare_raport_cazare(int ID, int persoane)
@@ -306,7 +357,7 @@ void vizualizare_raport_cazare(int ID, int persoane)
     printf("%i\n", p[i].id);
 
     printf("Pret: ");
-    printf("%f\n", persoane*p[i].price);
+    printf("%f\n", persoane * p[i].price);
 
     printf("Locuri Ramase: ");
     printf("%i\n", p[i].left);
@@ -332,10 +383,14 @@ void vizualizare_raport_cazare(int ID, int persoane)
     int option = utility_readOption();
 
     if (option == 1)
-    {
+    {   
+        printf("Vom redirectiona catre zona de plata\n");
+        printf("Daca va razganditi in timpul platii, din motive de securitate a banilor, singura posibilitate este de a opri programul\n");
+        Sleep(20000);
+        utility_Plata();
         printf("Vom redirectiona catre generarea formularului de cazare...");
         Sleep(4500);
-        generare_raport();
+        generare_raport(i);
     }
 
     else if (option == 2)
@@ -350,12 +405,13 @@ void vizualizare_raport_cazare(int ID, int persoane)
 
 void adauga_p()
 {
-    struct persoana *om = malloc(sizeof(struct persoana));
+    struct persoana* om = malloc(sizeof(struct persoana));
     char var[55];
 
-    printf("Citeste: ");
+    printf("Nume Persoana: ");
     scanf("%s", var);
     getchar();
+    printf("\n");
     strcpy((*om).nume, var);
     (*om).next = NULL;
 
@@ -371,6 +427,18 @@ void adauga_p()
 
         (*ptr).next = om;
     }
+}
+
+
+int utility_findByID(int ID)
+{
+    int i = 0;
+
+    while (p[i].id != ID && i < 5) i++;
+
+    if (i == 5) return 0;
+
+    return 1;
 }
 
 void rezerva_loc()
@@ -391,21 +459,11 @@ void rezerva_loc()
 
     else if (option == 2) utility_exit();
 
-    printf("\n");
-
-    int persoane = utility_getNumber();
-    int i = 1;
-
-    while (i <= persoane)
-    {
-        adauga_p();
-        i++;
-    }
+    int poz, persoane, check;
 
     printf("\n");
     int ID = utility_getID();
     printf("\n");
-
     int ok = utility_checkID(ID);
 
     if (ok == 3)
@@ -427,11 +485,38 @@ void rezerva_loc()
     }
 
     else if (ok == 2)
-        printf("Hotelul nu este disponibil deocamdata\n\n");
+    {
+        printf("Hotelul nu este disponibil deocamdata\n");
+        printf("Redirectionam catre pagina principala...");
+        Sleep(13000);
+        return;
+    }
 
     else
     {
-        printf("Hotelul s-a gasit si este disponibil, veti fi redirectionat catre pagina de confirmare...\n\n");
+        printf("Hotelul s-a gasit si este disponibil\n\n");
+        printf("\n");
+        persoane = utility_getNumber();
+        poz = utility_findByID(ID);
+        check = utility_checkLeft(persoane, poz);
+
+        if (check == 0)
+        {
+            printf("Nu sunt destule locuri disponibile\n");
+            printf("Verificati din nou locurile disponibile, veti fi directionat la meniul principal");
+            Sleep(13000);
+            return;
+        }
+
+        int i = 1;
+
+        while (i <= persoane)
+        {
+            adauga_p();
+            i++;
+        }
+
+        printf("Pregatim raportul de cazare...");
         Sleep(4500);
         vizualizare_raport_cazare(ID, persoane);
     }
@@ -514,11 +599,13 @@ void vizualizare_zboruri()
 }
 
 int main() {
-    
+
     utility_storeData();
 
     while (1)
     {
+        system("cls");
+
         utility_mainMenus();
 
         int option = utility_readOption();
