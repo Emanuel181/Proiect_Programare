@@ -86,7 +86,7 @@ void adauga_parere()
         printf("\n");
         poz = utility_findByID(ID);
     }
-    
+
     printf("Redirectionam catre pagina de adaugat pareri...");
     Sleep(4500);
     utility_ReviewMenu(poz);
@@ -136,7 +136,7 @@ void adauga_parere()
 
 void utility_printData()
 {
-    for (int i = 0; i <= 5; ++i)
+    for (int i = 0; i <= 4; ++i)
     {
         printf("---------------------------------------\n\n");
         printf("Loc: ");
@@ -175,7 +175,7 @@ void utility_printData()
 void utility_printReviews(int n)
 {
     for (int i = 0; i <= n; ++i)
-    {   
+    {
         printf("------------------------------------------------------------------------------------------------------------------------------\n\n");
         printf("Loc: ");
         printf("%s\n", c[i].locP);
@@ -326,7 +326,7 @@ void utility_Plata()
     if (option == 1)  utility_exit();
 
     char IBAN[40], cvv[40];
-    
+
     printf("Pentru confirmarea cazarii trebuie sa platiti online cu cardul si sa generati raportul de cazare\n");
     printf("Neindeplinirea celor 2 pasi va duce la nealocarea cazarii si restituirea banilor \n\n");
     printf("Introduceti IBAN: "); getchar();    fgets(IBAN, 38, stdin);
@@ -423,7 +423,20 @@ void generare_raport(int i)
 
 int utility_checkLeft(int persoane, int i)
 {
-    return ((p[i].left - persoane) > 0);
+    if ((p[i].left - persoane) > 0)
+    {
+        p[i].left -= persoane;
+        return 1;
+    }
+
+    else if ((p[i].left - persoane) == 0)
+    {
+        p[i].left = 0;
+        p[i].availability = 0;
+        return 1;
+    }
+
+    return 0;
 }
 
 void vizualizare_raport_cazare(int ID, int persoane)
@@ -530,9 +543,7 @@ int utility_findByID(int ID)
 
     while (p[i].id != ID && i < 5) i++;
 
-    if (i == 5) return 0;
-
-    return 1;
+    return i;
 }
 
 void rezerva_loc()
@@ -653,7 +664,11 @@ int utility_checkID(int ID)
     int i = 0;
     int catelocatii = 5;
 
-    while (p[i].id != ID && i < catelocatii) i++;
+    while (p[i].id != ID && i < catelocatii)
+    {
+        printf("%i\n", p[i].id);
+        i++;
+    }
 
     if (i < catelocatii)
     {
