@@ -3,6 +3,10 @@
 #include <conio.h>
 #include <dos.h>
 #include <Windows.h>
+#include <string.h>
+#include <math.h>
+
+
 
 int cntPareri, cntHoteluri, NumarDePersoane;
 
@@ -13,7 +17,7 @@ struct datelocatii {
     int id;
     float pret;
     int locuriRamase;
-    int evaluare; 
+    int evaluare;
     float mediePareri;
     int numarPareri;
     int disponibilitate;
@@ -188,9 +192,139 @@ void utility_printLocations()
     }
 
     //if ((n+1) % 2) 
-    
+
 }
 
+void utility_printLocationsByLocationName(char arg[])
+{
+    for (int i = 0; i < cntHoteluri; i++)
+    {
+        int ok = 1;
+
+        for (int j = 0; j < strlen(arg); j++)
+        {
+            if (arg[j] != locatie[i].numeLocatie[j]) {
+                ok = 0;
+                break;
+            }
+        }
+
+        if (ok == 1)
+        {
+            printf("---------------------------------------\n\n");
+            printf("Locatie: ");
+            printf("%s", locatie[i].numeLocatie);
+
+            printf("Nume Hotel: ");
+            printf("%s", locatie[i].numeHotel);
+
+            printf("ID: ");
+            printf("%i\n", locatie[i].id);
+
+            printf("Pret: ");
+            printf("%f\n", locatie[i].pret);
+
+            printf("Locuri Ramase: ");
+            printf("%i\n", locatie[i].locuriRamase);
+
+            printf("Numar de stele: ");
+            printf("%i\n", locatie[i].evaluare);
+
+            printf("Medie Review-uri: ");
+            printf("%f\n", locatie[i].mediePareri);
+
+            printf("Numar de Review-uri: ");
+            printf("%i\n", locatie[i].numarPareri);
+
+            printf("Disponibilitate: ");
+            printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
+
+            printf("---------------------------------------\n\n");
+        }
+    }
+
+}
+
+void utility_printLocationsByReviewsNumber(int num)
+{
+    for (int i = 0; i < cntHoteluri; i++)
+    {
+        if (locatie[i].numarPareri >= num)
+        {
+            printf("---------------------------------------\n\n");
+            printf("Locatie: ");
+            printf("%s", locatie[i].numeLocatie);
+
+            printf("Nume Hotel: ");
+            printf("%s", locatie[i].numeHotel);
+
+            printf("ID: ");
+            printf("%i\n", locatie[i].id);
+
+            printf("Pret: ");
+            printf("%f\n", locatie[i].pret);
+
+            printf("Locuri Ramase: ");
+            printf("%i\n", locatie[i].locuriRamase);
+
+            printf("Numar de stele: ");
+            printf("%i\n", locatie[i].evaluare);
+
+            printf("Medie Review-uri: ");
+            printf("%f\n", locatie[i].mediePareri);
+
+            printf("Numar de Review-uri: ");
+            printf("%i\n", locatie[i].numarPareri);
+
+            printf("Disponibilitate: ");
+            printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
+
+            printf("---------------------------------------\n\n");
+        }
+    }
+
+}
+
+
+void utility_printLocationsByMean(int num)
+{
+    for (int i = 0; i < cntHoteluri; i++)
+    {
+        if ((int)locatie[i].mediePareri >= num)
+        {
+            printf("---------------------------------------\n\n");
+            printf("Locatie: ");
+            printf("%s", locatie[i].numeLocatie);
+
+            printf("Nume Hotel: ");
+            printf("%s", locatie[i].numeHotel);
+
+            printf("ID: ");
+            printf("%i\n", locatie[i].id);
+
+            printf("Pret: ");
+            printf("%f\n", locatie[i].pret);
+
+            printf("Locuri Ramase: ");
+            printf("%i\n", locatie[i].locuriRamase);
+
+            printf("Numar de stele: ");
+            printf("%i\n", locatie[i].evaluare);
+
+            printf("Medie Review-uri: ");
+            printf("%f\n", locatie[i].mediePareri);
+
+            printf("Numar de Review-uri: ");
+            printf("%i\n", locatie[i].numarPareri);
+
+            printf("Disponibilitate: ");
+            printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
+
+            printf("---------------------------------------\n\n");
+        }
+    }
+
+}
 void utility_printReviews(int n)
 {
     for (int i = 0; i <= n; ++i)
@@ -286,6 +420,7 @@ void utility_storeReviews()
 {
     FILE* opinii = fopen("pareri.txt", "r");
     char store[255];
+
 
     while (fgets(store, 255, opinii))
     {
@@ -723,7 +858,7 @@ int utility_checkAvailabilityAndExistanceForBookingByID(int ID)
     int i = 0;
 
     while (locatie[i].id != ID && i < cntHoteluri) i++;
-    
+
 
     if (i < cntHoteluri)
     {
@@ -771,7 +906,7 @@ void anuleaza_rezervare()
         system("cls");
         int ID = utility_getIDForBooking();
         int poz = utility_findHotelByID(ID);
-        
+
         locatie[poz].locuriRamase += NumarDePersoane;
         locatie[poz].disponibilitate = 1;
 
@@ -793,9 +928,14 @@ void anuleaza_rezervare()
 void filtrare_optiuni()
 {
     system("cls");
-    printf("[1] Revino la meniul principal");
-    printf("[2] Opreste Programul");
-    int option = utility_readUserOption;
+    printf("[1] Revino la meniul principal\n");
+    printf("[2] Opreste Programul\n");
+    printf("[3] Cauta dupa locatie\n");
+    printf("[4] Cauta dupa numar de review-uri\n");
+    printf("[5] Cauta de la o anumita medie in sus\n\n");
+    
+    int option = utility_readUserOption();
+    getchar();
 
     if (option == 1)
     {
@@ -803,8 +943,83 @@ void filtrare_optiuni()
         return;
     }
 
-    if (option == 2) utility_exit();
+    else if (option == 2) utility_exit();
 
+    else if(option == 3)
+    {
+        char name[150];
+        printf("Numele Locatiei: ");  scanf("%s", name);
+        utility_printLocationsByLocationName(name);
+        printf("\n");
+
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Opreste Programul\n");
+        printf("[3] Inapoi la criteriile de cautare\n\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            system("cls");
+            return;
+        }
+
+        else if (option == 2) utility_exit();
+
+        else if (option == 3) filtrare_optiuni();
+    }
+
+    else if (option == 4)
+    {
+        int num;
+        printf("Numarul minim de review-uri: "); scanf("%i", &num);
+        utility_printLocationsByReviewsNumber(num);
+        printf("\n");
+
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Opreste Programul\n");
+        printf("[3] Inapoi la criteriile de cautare\n\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            system("cls");
+            return;
+        }
+
+        else if (option == 2) utility_exit();
+
+        else if (option == 3) filtrare_optiuni();
+
+    }
+
+    else if (option == 5)
+    {
+        int medie;
+        printf("Media minima: "); scanf("%fl", &medie);
+        utility_printLocationsByMean(medie);
+        printf("\n");
+
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Opreste Programul\n");
+        printf("[3] Inapoi la criteriile de cautare\n\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            system("cls");
+            return;
+        }
+
+        else if (option == 2) utility_exit();
+
+        else if (option == 3) filtrare_optiuni();
+
+    }
+
+ 
 }
 
 void vezi_cazarileMele()
@@ -872,7 +1087,7 @@ int main() {
         else if (option == 7) vezi_cazarileMele();
 
         else if (option == 8) utility_exit();
-        
+
     }
     return 0;
 }
