@@ -4,7 +4,7 @@
 #include <dos.h>
 #include <Windows.h>
 
-int cntPareri, cntHoteluri;
+int cntPareri, cntHoteluri, NumarDePersoane;
 
 
 struct datelocatii {
@@ -48,11 +48,19 @@ void utility_ReviewMenu()
 void utility_exit()
 {
     system("cls");
+
+    FILE* ptr = fopen("raport.txt", "w");
+
+    fprintf(ptr, "\0");
+
+    fclose(ptr);
+
     exit(0);
 }
 
 void adauga_parere()
 {
+    system("cls");
     ++cntPareri;
 
     char var[150], text[401];
@@ -143,7 +151,7 @@ void utility_printLocations()
 {
     for (int i = 0; i < cntHoteluri; ++i)
     {
-        if (locatie[i].disponibilitate == 1)
+        if (locatie[i].locuriRamase > 0)
         {
             Sleep(2500);
             printf("---------------------------------------\n\n");
@@ -268,7 +276,7 @@ void utility_mainMenus()
     printf("[2] Pareri Fosti Clienti\n");
     printf("[3] Rezerva loc\n");
     printf("[4] Anuleaza Rezervarea\n");
-    printf("[5] Vizualizare zboruri\n");
+    printf("[5] Filtreaza optiuni\n");
     printf("[6] Adauga un review\n");
     printf("[7] Vezi cazarile mele\n");
     printf("[8] Oprire Program\n\n");
@@ -334,7 +342,7 @@ void utility_SitemDePlata()
     printf("[1] Anularea procesului de plata\n");
     printf("[2] Continua Plata\n\n");
 
-    int option = utility_readUserOption;
+    int option = utility_readUserOption();
 
     if (option == 1)  utility_exit();
 
@@ -417,6 +425,8 @@ void utility_generare_raport(int i)
 
         fclose(cazare);
 
+        locatie[i].locuriRamase -= NumarDePersoane;
+
     }
 
     else if (option == 2)
@@ -435,20 +445,7 @@ void utility_generare_raport(int i)
 
 int utility_checkLocuriRamase(int persoane, int i)
 {
-    if ((locatie[i].locuriRamase - persoane) > 0)
-    {
-        locatie[i].locuriRamase -= persoane;
-        return 1;
-    }
-
-    else if ((locatie[i].locuriRamase - persoane) == 0)
-    {
-        locatie[i].locuriRamase = 0;
-        locatie[i].disponibilitate = 0;
-        return 1;
-    }
-
-    return 0;
+    return ((locatie[i].locuriRamase - persoane) >= 0);
 }
 
 void utility_vizualizare_raport_cazare(int poz, int persoane)
@@ -570,11 +567,13 @@ void rezerva_loc()
 
     else if (option == 2) utility_exit();
 
-    int poz, persoane, check;
+    int poz, check;
 
     printf("\n");
     int ID = utility_getIDForBooking();
     printf("\n");
+
+
     int ok = utility_checkAvailabilityAndExistanceForBookingByID(ID);
 
     if (ok == 3)
@@ -607,9 +606,9 @@ void rezerva_loc()
     {
         printf("Hotelul s-a gasit si este disponibil\n\n");
         printf("\n");
-        persoane = utility_getPersonsNumber();
+        NumarDePersoane = utility_getPersonsNumber();
         poz = utility_findHotelByID(ID);
-        check = utility_checkLocuriRamase(persoane, poz);
+        check = utility_checkLocuriRamase(NumarDePersoane, poz);
 
         if (check == 0)
         {
@@ -621,7 +620,7 @@ void rezerva_loc()
 
         int i = 1;
 
-        while (i <= persoane)
+        while (i <= NumarDePersoane)
         {
             utility_adaugaPersoana();
             i++;
@@ -629,9 +628,8 @@ void rezerva_loc()
 
         printf("Pregatim raportul de cazare...");
         Sleep(5500);
-        utility_vizualizare_raport_cazare(poz, persoane);
+        utility_vizualizare_raport_cazare(poz, NumarDePersoane);
     }
-
 }
 
 int utility_getPersonsNumber()
@@ -646,22 +644,77 @@ int utility_getPersonsNumber()
 
 int utility_getIDForBooking()
 {
-    int id;
+    char id[100];
 
-    printf("Scrieti ID-ul hotelului unde vreti sa se faca cazarea\n\n");
-    printf("ID: "); scanf("%i", &id);
+    printf("Scrieti ID-ul hotelului: \n\n");
+    printf("ID: "); scanf("%s", &id);
+    getchar();
 
-    return id;
+    if ((strlen(id) >= 2) || (id[0] <= '0' || id[0] > '9'))
+    {
+        system("cls");
+        printf("Acesta nu este un ID valid !\n\n");
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Opreste Programul\n");
+        printf("[3] Reintrodu ID-ul\n\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            main();
+        }
+
+        else if (option == 2) utility_exit();
+
+        else
+        {
+            printf("Reincepem procesul...");
+
+            Sleep(3500);
+            rezerva_loc();
+        }
+    }
+
+    return atoi(id);
 }
 
 int utility_receiveIDForReview()
 {
-    int id;
+    char id[100];
 
     printf("Scrieti ID-ul hotelului pentru care vreti sa faceti review-ul\n\n");
-    printf("ID: "); scanf("%i", &id);
+    printf("ID: "); scanf("%s", &id);
 
-    return id;
+    getchar();
+
+    if ((strlen(id) >= 2) || (id[0] <= '0' || id[0] > '9'))
+    {
+        system("cls");
+        printf("Acesta nu este un ID valid !\n\n");
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Opreste Programul\n");
+        printf("[3] Reintrodu ID-ul\n\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            main();
+        }
+
+        else if (option == 2) utility_exit();
+
+        else
+        {
+            printf("Reincepem procesul...\n\n");
+
+            Sleep(3500);
+            adauga_parere();
+        }
+    }
+
+    return atoi(id);
 }
 
 int utility_checkAvailabilityAndExistanceForBookingByID(int ID)
@@ -700,11 +753,10 @@ void anuleaza_rezervare()
     system("clS");
 
     printf("[1] Revino la meniul principal\n");
-    printf("[2] Opreste Programul\n\n");
+    printf("[2] Opreste Programul\n");
+    printf("[3] Continua anularea rezervarii\n\n");
 
     int option = utility_readUserOption();
-
-    // anuleaza rezervarea pe baza resetarii unei valori booleene
 
     if (option == 1)
     {
@@ -713,9 +765,32 @@ void anuleaza_rezervare()
     }
 
     if (option == 2) utility_exit();
+
+    else
+    {
+        system("cls");
+        int ID = utility_getIDForBooking();
+        int poz = utility_findHotelByID(ID);
+        
+        locatie[poz].locuriRamase += NumarDePersoane;
+        locatie[poz].disponibilitate = 1;
+
+        FILE* ptr = fopen("raport.txt", "w");
+
+        fprintf(ptr, "\0");
+
+        fclose(ptr);
+
+        printf("Cazarea a fost anulata, banii vor fi restituti cat de curand\n");
+        printf("Redirectionam catre meniul principal...\n");
+        Sleep(3500);
+        main();
+
+    }
+
 }
 
-void vizualizare_zboruri()
+void filtrare_optiuni()
 {
     system("cls");
     printf("[1] Revino la meniul principal");
@@ -732,7 +807,7 @@ void vizualizare_zboruri()
 
 }
 
-vezi_cazarileMele()
+void vezi_cazarileMele()
 {
 
     system("cls");
@@ -790,13 +865,14 @@ int main() {
 
         else if (option == 4) anuleaza_rezervare();
 
-        else if (option == 5) vizualizare_zboruri();
+        else if (option == 5) filtrare_optiuni();
 
         else if (option == 6) adauga_parere();
 
         else if (option == 7) vezi_cazarileMele();
 
         else if (option == 8) utility_exit();
+        
     }
     return 0;
 }
