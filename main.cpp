@@ -65,6 +65,8 @@ void utility_exit()
 void adauga_parere()
 {
     system("cls");
+
+    printf("*********************************************************************** MENIUL DE ADAUGAT PARERI ****************************************************************************\n\n");
     ++cntPareri;
 
     char var[150], text[401];
@@ -158,35 +160,35 @@ void utility_printLocations()
         if (locatie[i].locuriRamase > 0)
         {
             Sleep(2500);
-            printf("---------------------------------------\n\n");
-            printf("Locatie: ");
+            printf("                           -----------------------------------------------------------------\n\n");
+            printf("                                        Locatie: ");
             printf("%s", locatie[i].numeLocatie);
 
-            printf("Nume Hotel: ");
+            printf("                                        Nume Hotel: ");
             printf("%s", locatie[i].numeHotel);
 
-            printf("ID: ");
+            printf("                                        ID: ");
             printf("%i\n", locatie[i].id);
 
-            printf("Pret: ");
+            printf("                                        Pret: ");
             printf("%f\n", locatie[i].pret);
 
-            printf("Locuri Ramase: ");
+            printf("                                        Locuri Ramase: ");
             printf("%i\n", locatie[i].locuriRamase);
 
-            printf("Numar de stele: ");
+            printf("                                        Numar de stele: ");
             printf("%i\n", locatie[i].evaluare);
-
-            printf("Medie Review-uri: ");
+                
+            printf("                                        Medie Review-uri: ");
             printf("%f\n", locatie[i].mediePareri);
 
-            printf("Numar de Review-uri: ");
+            printf("                                        Numar de Review-uri: ");
             printf("%i\n", locatie[i].numarPareri);
 
-            printf("Disponibilitate: ");
+            printf("                                        Disponibilitate: ");
             printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-            printf("---------------------------------------\n\n");
+            printf("                           -----------------------------------------------------------------\n\n");
         }
 
     }
@@ -203,7 +205,7 @@ void utility_printLocationsByLocationName(char arg[])
 
         for (int j = 0; j < strlen(arg); j++)
         {
-            if (arg[j] != locatie[i].numeLocatie[j]) {
+            if (tolower(arg[j]) != tolower(locatie[i].numeLocatie[j])) {
                 ok = 0;
                 break;
             }
@@ -290,7 +292,7 @@ void utility_printLocationsByMean(int num)
 {
     for (int i = 0; i < cntHoteluri; i++)
     {
-        if ((int)locatie[i].mediePareri >= num)
+        if ((int)((locatie[i].mediePareri)) >= num)
         {
             printf("---------------------------------------\n\n");
             printf("Locatie: ");
@@ -327,27 +329,43 @@ void utility_printLocationsByMean(int num)
 }
 void utility_printReviews(int n)
 {
+    printf("************************************************************************** PARERI FOSTI CLIENTI *****************************************************************************\n\n");
+
     for (int i = 0; i <= n; ++i)
     {
         Sleep(2000);
-        printf("------------------------------------------------------------------------------------------------------------------------------\n\n");
-        printf("Loc: ");
+        printf("                                            -------------------------------------------------------------------------\n\n");
+        printf("                                                            Loc: ");
         printf("%s\n", parere[i].Locatie);
 
-        printf("Nume Hotel: ");
+        printf("                                                            Nume Hotel: ");
         printf("%s\n", parere[i].Hotel);
 
-        printf("Nume si Prenume: ");
+        printf("                                                            Nume si Prenume: ");
         printf("%s\n", parere[i].numePrenume);
 
-        printf("Parere: ");
-        printf("%s\n", parere[i].txt);
+        printf("                          Parere: ");
+        for (int j = 0; j < strlen(parere[i].txt); j++)
+            if (parere[i].txt[j] != '\\')
+                printf("%c", parere[i].txt[j]);
+            else
+            {
+                printf(" ");
+                parere[i].txt[j + 1] = ' ';
+                strcpy(parere[i].txt + j, parere[i].txt + j + 1);
+            }
 
-        printf("Nota: ");
+        printf("\n");
+
+        printf("                                                            Nota: ");
         printf("%f\n\n", parere[i].nota);
 
-        printf("-------------------------------------------------------------------------------------------------------------------------------\n\n");
-    }
+        printf("                                            ----------------------------------------------------------------------------\n\n");
+
+    }   
+
+    printf("*****************************************************************************************************************************************************************************\n\n");
+
 
     //if ((n + 1) % 2) 
 }
@@ -450,12 +468,15 @@ void utility_storeReviews()
 void optiuniLocatii()
 {
     system("clS");
+    printf("************************************************* LOCATIILE DISPONIBILE ************************************************\n\n");
 
     utility_printLocations();
 
+    printf("************************************************* LOCATIILE DISPONIBILE ************************************************\n\n");
+    
     printf("[1] Revino la meniul principal\n");
     printf("[2] Opreste Programul\n\n");
-
+    
     int option = utility_readUserOption();
 
     if (option == 1)
@@ -473,6 +494,8 @@ void optiuniLocatii()
 void utility_SitemDePlata()
 {
     system("cls");
+
+    printf("**************************************************************************** MENIUL DE PLATA ********************************************************************************\n\n");
 
     printf("[1] Anularea procesului de plata\n");
     printf("[2] Continua Plata\n\n");
@@ -522,6 +545,8 @@ void pareri_fosti_clienti()
 void utility_generare_raport(int i)
 {
     system("clS");
+
+    printf("**************************************************** MENIUL DE GENERARE RAPORT DE CAZARE IN FORMAT TEXT *************************************************\n\n");
 
     printf("[1] Genereaza raport de cazare\n");
     printf("[2] Revino la meniul principal\n");
@@ -587,9 +612,11 @@ void utility_vizualizare_raport_cazare(int poz, int persoane)
 {
     system("clS");
 
+    printf("**************************************************************************** RAPORT DE CAZARE ONLINE ************************************************************************\n\n");
+
     printf("Ati ales:\n\n");
 
-    printf("---------------------------------------\n\n");
+    printf("----------------------------------------------------------------------\n\n");
     printf("Locatie: ");
     printf("%s", locatie[poz].numeLocatie);
 
@@ -617,7 +644,10 @@ void utility_vizualizare_raport_cazare(int poz, int persoane)
     printf("Disponibilitate: ");
     printf(locatie[poz].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-    printf("---------------------------------------\n\n");
+    printf("----------------------------------------------------------------------\n\n");
+
+    printf("***************************************************************************************************************************************************************************\n\n");
+
 
     printf("[1] Confirmati\n");
     printf("[2] Revino la meniul principal\n");
@@ -688,9 +718,14 @@ void rezerva_loc()
 {
     system("clS");
 
+    printf("************************************************************************** MENIU DE REZERVARE A LOCULUI *********************************************************************\n\n");
+
     printf("[1] Revino la meniul principal\n");
     printf("[2] Opreste Programul\n");
     printf("[3] Continuati\n\n");
+
+    printf("*****************************************************************************************************************************************************************************\n\n");
+
 
     int option = utility_readUserOption();
 
@@ -707,6 +742,8 @@ void rezerva_loc()
     printf("\n");
     int ID = utility_getIDForBooking();
     printf("\n");
+    printf("Se verifica daca ID-ul corespunde unui hotel si disponibilitatea hotelului...\n\n");
+    Sleep(3500);
 
 
     int ok = utility_checkAvailabilityAndExistanceForBookingByID(ID);
@@ -739,8 +776,7 @@ void rezerva_loc()
 
     else
     {
-        printf("Hotelul s-a gasit si este disponibil\n\n");
-        printf("\n");
+        printf("Hotelul s-a gasit si este disponibil\n\n\n");
         NumarDePersoane = utility_getPersonsNumber();
         poz = utility_findHotelByID(ID);
         check = utility_checkLocuriRamase(NumarDePersoane, poz);
@@ -773,6 +809,8 @@ int utility_getPersonsNumber()
 
     printf("Pentru cate persoane se va face cazarea ?\n\n");
     printf("Perosane: "); scanf("%i", &n);
+    printf("\n");
+    printf("Introduceti numele tuturor persoanelor: \n\n");
 
     return n;
 }
@@ -780,6 +818,10 @@ int utility_getPersonsNumber()
 int utility_getIDForBooking()
 {
     char id[100];
+    system("cls");
+
+    printf("********************************************************* MENIU DE REZERVARE A LOCULUI - SOLICITARE ID HOTEL*****************************************************************\n\n");
+
 
     printf("Scrieti ID-ul hotelului: \n\n");
     printf("ID: "); scanf("%s", &id);
@@ -787,8 +829,8 @@ int utility_getIDForBooking()
 
     if ((strlen(id) >= 2) || (id[0] <= '0' || id[0] > '9'))
     {
-        system("cls");
-        printf("Acesta nu este un ID valid !\n\n");
+        printf("\n\n");
+        printf("EROARE: Acesta nu este un ID valid !\n\n");
         printf("[1] Revino la meniul principal\n");
         printf("[2] Opreste Programul\n");
         printf("[3] Reintrodu ID-ul\n\n");
@@ -887,6 +929,8 @@ void anuleaza_rezervare()
 {
     system("clS");
 
+    printf("************************************************************************ MENIUL DE ANULAT REZERVAREA ************************************************************************\n\n");
+
     printf("[1] Revino la meniul principal\n");
     printf("[2] Opreste Programul\n");
     printf("[3] Continua anularea rezervarii\n\n");
@@ -928,12 +972,13 @@ void anuleaza_rezervare()
 void filtrare_optiuni()
 {
     system("cls");
+    printf("************************************************************************** MENIU - CAUTARE LOCATII **************************************************************************\n\n");
     printf("[1] Revino la meniul principal\n");
     printf("[2] Opreste Programul\n");
     printf("[3] Cauta dupa locatie\n");
     printf("[4] Cauta dupa numar de review-uri\n");
     printf("[5] Cauta de la o anumita medie in sus\n\n");
-    
+
     int option = utility_readUserOption();
     getchar();
 
@@ -945,18 +990,23 @@ void filtrare_optiuni()
 
     else if (option == 2) utility_exit();
 
-    else if(option == 3)
+    else if (option == 3)
     {
         char name[150];
         printf("Numele Locatiei: ");  scanf("%s", name);
+        printf("\n\n");
         utility_printLocationsByLocationName(name);
-        printf("\n");
+        printf("\n\n");
+
+        printf("*****************************************************************************************************************************************************\n\n");
+
 
         printf("[1] Revino la meniul principal\n");
         printf("[2] Opreste Programul\n");
         printf("[3] Inapoi la criteriile de cautare\n\n");
 
         int option = utility_readUserOption();
+        printf("\n\n");
 
         if (option == 1)
         {
@@ -973,8 +1023,12 @@ void filtrare_optiuni()
     {
         int num;
         printf("Numarul minim de review-uri: "); scanf("%i", &num);
+
+        printf("\n\n");
         utility_printLocationsByReviewsNumber(num);
-        printf("\n");
+        printf("\n\n");
+        printf("*****************************************************************************************************************************************************\n\n");
+
 
         printf("[1] Revino la meniul principal\n");
         printf("[2] Opreste Programul\n");
@@ -997,9 +1051,13 @@ void filtrare_optiuni()
     else if (option == 5)
     {
         int medie;
-        printf("Media minima: "); scanf("%fl", &medie);
+        printf("Media minima: "); scanf("%i", &medie);
+        printf("\n\n");
         utility_printLocationsByMean(medie);
-        printf("\n");
+        printf("\n\n");
+
+        printf("*****************************************************************************************************************************************************\n\n");
+
 
         printf("[1] Revino la meniul principal\n");
         printf("[2] Opreste Programul\n");
@@ -1019,7 +1077,7 @@ void filtrare_optiuni()
 
     }
 
- 
+
 }
 
 void vezi_cazarileMele()
@@ -1027,6 +1085,7 @@ void vezi_cazarileMele()
 
     system("cls");
 
+    printf("************************************************************************* MENIU - CAZARILE MELE *****************************************************************************\n\n");
     FILE* cazari = fopen("raport.txt", "r");
     char txt[250];
 
