@@ -421,6 +421,18 @@ void utility_storeLocationsData()
 
 }
 
+void utility_firstScreen()
+{
+    printf("******************************************************************** PROIECT - APLICATIE DE TURISM **************************************************************************\n\n\n\n");
+    printf("                                                                           RUSU EMANUEL\n\n\n\n");
+    printf("                                                                             loading...\n\n\n\n");
+    printf("*****************************************************************************************************************************************************************************\n\n\n");
+
+    Sleep(10500);
+
+
+}
+
 
 int utility_readUserOption()
 {
@@ -853,7 +865,9 @@ int utility_getIDForBooking()
     printf("ID: "); scanf("%s", &id);
     getchar();
 
-    if ((strlen(id) >= 2) || (id[0] <= '0' || id[0] > '9'))
+    int num = (log10(atoi(id))+1);
+
+    if (num != strlen(id))
     {
         printf("\n\n");
         printf("EROARE: Acesta nu este un ID valid !\n\n");
@@ -892,7 +906,9 @@ int utility_receiveIDForReview()
 
     getchar();
 
-    if ((strlen(id) >= 2) || (id[0] <= '0' || id[0] > '9'))
+    int num = (log10(atoi(id)) + 1);
+
+    if (num != strlen(id))
     {
         system("cls");
         printf("Acesta nu este un ID valid !\n\n");
@@ -1164,6 +1180,8 @@ int main() {
     utility_storeLocationsData();
     utility_storeReviews();
 
+    utility_firstScreen();
+
     while (1)
     {
         system("cls");
@@ -1174,7 +1192,6 @@ int main() {
 
         printf("\n");
         printf("*****************************************************************************************************************************************************************************\n\n");
-
 
         int option = utility_readUserOption();
 
