@@ -7,6 +7,7 @@
 #include <math.h>
 
 int cntPareri, cntHoteluri, NumarDePersoane;
+char NumePersoana[101];
 
 
 struct datelocatii {
@@ -40,6 +41,102 @@ struct persoana
 struct persoana* head = NULL;
 
 
+
+void utility_createAcc()
+{
+    system("cls");
+    char nume[101], pass[101];
+
+    FILE* cont = fopen("conturi.txt", "a");
+
+    printf("Nume de utilizator: "); scanf("%s", nume);
+
+    printf("\n");
+
+    printf("Parola: "); scanf("%s", pass);
+
+    fprintf(cont, "%s\n", nume);
+    fprintf(cont, "%s\n", pass);
+
+    fclose(cont);
+
+    strcpy(NumePersoana, nume);
+
+}
+
+int utility_intraInCont()
+{
+    char nume[101], pass[101];
+
+    printf("Nume de utilizator: "); scanf("%s", nume);
+
+    printf("\n");
+
+    printf("Parola: "); scanf("%s", pass);
+
+    FILE* cont = fopen("conturi.txt", "r");
+
+    char checkName[101], checkPass[101];
+
+    int ok = 0;
+
+    while (fgets(checkName, 101, cont))
+    {
+        checkName[strlen(checkName) - 1] = '\0';
+        /*printf("%s%s", checkName, nume);
+        printf("\n");
+        system("pause");*/
+        if (strcmp(checkName, nume) == 0)
+        {
+            ok = 1;
+            break;
+        }
+    }
+
+    if (ok == 0) return 0;
+
+    
+    else
+    {
+        strcpy(NumePersoana, nume);
+        return 1;
+    }
+}
+
+void utility_logare()
+{
+    system("cls");
+
+    printf("[1] Am cont\n[2] Nu am cont\n");
+
+    int option = utility_readUserOption();
+
+    if (option == 2) utility_createAcc();
+
+    else
+    {
+        int raspuns = utility_intraInCont();
+        if (raspuns == 0)
+        {
+            printf("Se pare ca nu v-am gasit\n");
+            printf("Verificati datele si incercati din nou\n");
+            printf("[1] Reincearca\n");
+            printf("[2] Revino la meniul principal\n\n");
+
+            option = utility_readUserOption();
+
+            if(option == 1) utility_logare();
+
+            else
+            { 
+                strcpy(NumePersoana, "raport.txt");
+                system("cls");
+                return;
+            }
+        }
+    }
+}
+
 void utility_ReviewMenu()
 {
     system("cls");
@@ -47,7 +144,6 @@ void utility_ReviewMenu()
     printf("Pregatim pagina de adaugat pareri...");
     Sleep(4500);
 }
-
 
 void utility_exit()
 {
@@ -181,7 +277,7 @@ void utility_printLocations()
 
             printf("                                        Numar de stele: ");
             printf("%i\n", locatie[i].evaluare);
-                
+
             printf("                                        Medie Review-uri: ");
             printf("%f\n", locatie[i].mediePareri);
 
@@ -369,7 +465,7 @@ void utility_printReviews(int n)
 
         printf("                                            ----------------------------------------------------------------------------\n\n");
 
-    }   
+    }
 
     printf("*****************************************************************************************************************************************************************************\n\n");
 
@@ -428,7 +524,7 @@ void utility_firstScreen()
     printf("                                                                             loading...\n\n\n\n");
     printf("*****************************************************************************************************************************************************************************\n\n\n");
 
-    Sleep(10500);
+    Sleep(10);
 
 
 }
@@ -497,11 +593,11 @@ void optiuniLocatii()
     utility_printLocations();
 
     printf("*********************************************************************************************************************************************************************\n\n\n");
-    
+
     printf("\n\n");
     printf("                                              [1] Revino la meniul principal\n");
     printf("                                              [2] Opreste Programul\n\n");
-    
+
     printf("                                              "); getchar(); int option = utility_readUserOption();
 
     if (option == 1)
@@ -590,7 +686,12 @@ void utility_generare_raport(int i)
         printf("Se incepe generarea raportului de cazare...\n\n");
         Sleep(4500);
 
-        FILE* cazare = fopen("raport.txt", "w");
+        char Numeprs[101];
+
+        strcpy(Numeprs, NumePersoana);
+        strcat(Numeprs, ".txt");
+
+        FILE* cazare = fopen(Numeprs, "a");
         fprintf(cazare, "Persoane\n");
 
         struct persoana* temp = head;
@@ -865,7 +966,7 @@ int utility_getIDForBooking()
     printf("ID: "); scanf("%s", &id);
     getchar();
 
-    int num = (log10(atoi(id))+1);
+    int num = (log10(atoi(id)) + 1);
 
     if (num != strlen(id))
     {
@@ -1181,6 +1282,8 @@ int main() {
     utility_storeReviews();
 
     utility_firstScreen();
+    utility_logare();
+
 
     while (1)
     {
