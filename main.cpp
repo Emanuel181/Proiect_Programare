@@ -6,6 +6,7 @@
 #include <string.h>
 #include <math.h>
 
+
 int cntPareri, cntHoteluri, NumarDePersoane;
 char NumePersoana[101];
 
@@ -38,8 +39,8 @@ struct persoana
     struct persoana* next;
 };
 
-struct persoana* head = NULL;
 
+struct persoana* head = NULL;
 
 
 void utility_createAcc()
@@ -63,6 +64,7 @@ void utility_createAcc()
     strcpy(NumePersoana, nume);
 
 }
+
 
 int utility_intraInCont()
 {
@@ -95,13 +97,14 @@ int utility_intraInCont()
 
     if (ok == 0) return 0;
 
-    
+
     else
     {
         strcpy(NumePersoana, nume);
         return 1;
     }
 }
+
 
 void utility_logare()
 {
@@ -125,10 +128,10 @@ void utility_logare()
 
             option = utility_readUserOption();
 
-            if(option == 1) utility_logare();
+            if (option == 1) utility_logare();
 
             else
-            { 
+            {
                 strcpy(NumePersoana, "raport.txt");
                 system("cls");
                 return;
@@ -137,6 +140,7 @@ void utility_logare()
     }
 }
 
+
 void utility_ReviewMenu()
 {
     system("cls");
@@ -144,6 +148,7 @@ void utility_ReviewMenu()
     printf("Pregatim pagina de adaugat pareri...");
     Sleep(4500);
 }
+
 
 void utility_exit()
 {
@@ -161,7 +166,7 @@ void utility_exit()
 
 void adauga_parere()
 {
-    system("cls");
+    Sleep(0.016666);  system("cls");
     fflush(stdin);
 
     printf("*********************************************************************** MENIUL DE ADAUGAT PARERI ****************************************************************************\n\n");
@@ -188,7 +193,7 @@ void adauga_parere()
 
         if (option == 1)
         {
-            system("cls");
+            Sleep(0.016666);  system("cls");
             return;
         }
 
@@ -206,7 +211,7 @@ void adauga_parere()
     printf("Redirectionam catre pagina de adaugat pareri...");
     Sleep(4500);
     utility_ReviewMenu(poz);
-    system("cls");
+    Sleep(0.016666);  system("cls");
     printf("Puteti inncepe: \n\n");
 
     printf("Numele locatiei: ");
@@ -517,6 +522,7 @@ void utility_storeLocationsData()
 
 }
 
+
 void utility_firstScreen()
 {
     printf("******************************************************************** PROIECT - APLICATIE DE TURISM **************************************************************************\n\n\n\n");
@@ -584,9 +590,10 @@ void utility_storeReviews()
 
 }
 
+
 void optiuniLocatii()
 {
-    system("clS");
+    Sleep(0.016666);  system("clS");
     fflush(stdin);
     printf("*************************************************************************** LOCATIILE DISPONIBILE **********************************************************************\n\n\n");
 
@@ -607,9 +614,65 @@ void optiuniLocatii()
     }
 
     else if (option == 2)  utility_exit();
+}
 
 
-    // arata optiunile complete
+int utility_Dubleaza(int num)
+{
+    if (num > 9) return ((num % 10) + (num / 10));
+
+    return num;
+}
+
+
+int utility_CheckIBAN(char IBAN[])
+{
+    int sum = 0;
+
+    for (int i = strlen(IBAN) - 1; i >= 0; --i)
+    {
+        if (i % 2 == 0)
+        {
+            int num = (int)((IBAN[i] - '0') * 2);
+            sum = sum + utility_Dubleaza(num);
+        }
+
+        else sum = sum + (IBAN[i] - '0');
+    }
+
+    return ((sum % 10) == 0);
+}
+
+
+int utility_CheckPrefix(char IBAN[])
+{
+    return ((IBAN[0] - '0' == 4) || (IBAN[0] - '0' == 5) || (IBAN[0] - '0' == 6) || (IBAN[0] - '0' == 3 && IBAN[1] - '0' == 7));
+}
+
+
+int utility_CheckLength(char IBAN[])
+{
+    int a = strlen(IBAN);
+    --a;
+
+    return (a >= 13) && (a <= 16);
+}
+
+
+int utility_CheckLengthCVV(char cvv[])
+{
+    return (strlen(cvv) >= 3 && strlen(cvv) <= 4);
+}
+
+
+int utility_CheckCVV(char cvv[])
+{
+    for (int i = 0; i < strlen(cvv); ++i)
+    {
+        if (cvv[i] - '0' != 0 && cvv[i] - '0' != 1 && cvv[i] - '0' != 2 && cvv[i] - '0' != 3 && cvv[i] - '0' != 4 && cvv[i] - '0' != 5 && cvv[i] - '0' != 6 && cvv[i] - '0' != 7 && cvv[i] - '0' != 8 && cvv[i] - '0' != 9) return 0;
+    }
+
+    return 1;
 }
 
 
@@ -631,13 +694,47 @@ void utility_SitemDePlata()
 
     printf("Pentru confirmarea cazarii trebuie sa platiti online cu cardul si sa generati raportul de cazare\n");
     printf("Neindeplinirea celor 2 pasi va duce la nealocarea cazarii si restituirea banilor \n\n");
-    printf("Introduceti IBAN: "); getchar();    fgets(IBAN, 38, stdin);
+    printf("Introduceti IBAN: "); getchar();    scanf("%s",IBAN);
 
-    printf("\n");
+    int checkLength = utility_CheckLength(IBAN);
+    int checkPrefix = utility_CheckPrefix(IBAN);
+    int ok = utility_CheckIBAN(IBAN);
+
+    if ((checkLength != 0 && checkPrefix != 0 && ok != 0))
+    {
+        printf("Card Validat!\n");
+        printf("\n");
+    }
+
+    else
+    {   
+        printf("%i %i %i\n", checkLength, checkPrefix, ok);
+        printf("Cardul nu este valid. Procesul cazarii se opreste.\n");
+        printf("[1] Revino la meniul principal\n");
+        printf("[2] Reinitiaza plata\n");
+
+        int option = utility_readUserOption();
+
+        if (option == 1)
+        {
+            system("cls");
+            return;
+        }
+
+        else utility_SitemDePlata();
+    }
 
 
     printf("Introduceti codul de securitate(CVV): "); scanf("%s", cvv);
-    printf("\n");
+
+    int checkLengthCVV = utility_CheckLengthCVV(cvv);
+    int okCVV = utility_CheckCVV(cvv);
+
+    if ((checkLengthCVV == 1 && okCVV == 1))
+    {
+        printf("CVV valid\n");
+        printf("\n");
+    }
 
     printf("Plata se proceseaza...\n\n");
     Sleep(3500);
@@ -648,7 +745,7 @@ void utility_SitemDePlata()
 
 void pareri_fosti_clienti()
 {
-    system("clS");
+    Sleep(0.016666);  system("clS");
 
     fflush(stdin);
 
@@ -718,7 +815,6 @@ void utility_generare_raport(int i)
         fclose(cazare);
 
         locatie[i].locuriRamase -= NumarDePersoane;
-
     }
 
     else if (option == 2)
@@ -794,10 +890,10 @@ void utility_vizualizare_raport_cazare(int poz, int persoane)
     {
         printf("Vom redirectiona catre zona de plata\n");
         printf("Daca va razganditi in timpul platii, din motive de securitate a banilor, singura posibilitate este de a opri programul\n");
-        Sleep(20000);
+       // Sleep(20000);
         utility_SitemDePlata();
         printf("Vom redirectiona catre generarea formularului de cazare...");
-        Sleep(4500);
+       // Sleep(4500);
         utility_generare_raport(poz);
     }
 
@@ -841,6 +937,7 @@ void utility_adaugaPersoana()
     }
 }
 
+
 int utility_findHotelByID(int ID)
 {
     int i = 0;
@@ -853,7 +950,7 @@ int utility_findHotelByID(int ID)
 
 void rezerva_loc()
 {
-    system("clS");
+    Sleep(0.016666); system("clS");
 
     printf("************************************************************************** MENIU DE REZERVARE A LOCULUI *********************************************************************\n\n");
 
@@ -868,7 +965,7 @@ void rezerva_loc()
 
     if (option == 1)
     {
-        system("cls");
+        Sleep(0.016666);  system("cls");
         return;
     }
 
@@ -895,7 +992,7 @@ void rezerva_loc()
 
         if (option == 1)
         {
-            system("cls");
+            Sleep(0.016666); system("cls");
             return;
         }
 
@@ -1054,7 +1151,6 @@ int utility_checkAvailabilityAndExistanceForBookingByID(int ID)
     }
 
     return 3;
-
 }
 
 
@@ -1074,7 +1170,7 @@ int utility_checkIDExistanceForReview(int ID)
 
 void anuleaza_rezervare()
 {
-    system("clS");
+    Sleep(0.016666); system("clS");
 
     printf("************************************************************************ MENIUL DE ANULAT REZERVAREA ************************************************************************\n\n");
 
@@ -1086,7 +1182,7 @@ void anuleaza_rezervare()
 
     if (option == 1)
     {
-        system("cls");
+        Sleep(0.016666);  system("cls");
         return;
     }
 
@@ -1094,7 +1190,7 @@ void anuleaza_rezervare()
 
     else
     {
-        system("cls");
+        Sleep(0.016666);  system("cls");
         int ID = utility_getIDForBooking();
         int poz = utility_findHotelByID(ID);
 
@@ -1121,7 +1217,7 @@ void anuleaza_rezervare()
 
 void filtrare_optiuni()
 {
-    system("cls");
+    Sleep(0.016666);  system("cls");
     fflush(stdin);
     printf("************************************************************************** MENIU - CAUTARE LOCATII **************************************************************************\n\n");
     printf("[1] Revino la meniul principal\n");
@@ -1135,7 +1231,7 @@ void filtrare_optiuni()
 
     if (option == 1)
     {
-        system("cls");
+        Sleep(0.016666);  system("cls");
         return;
     }
 
@@ -1161,7 +1257,7 @@ void filtrare_optiuni()
 
         if (option == 1)
         {
-            system("cls");
+            Sleep(0.016666);  system("cls");
             return;
         }
 
@@ -1189,7 +1285,7 @@ void filtrare_optiuni()
 
         if (option == 1)
         {
-            system("cls");
+            Sleep(0.016666);  system("cls");
             return;
         }
 
@@ -1218,7 +1314,7 @@ void filtrare_optiuni()
 
         if (option == 1)
         {
-            system("cls");
+            Sleep(0.016666);  system("cls");
             return;
         }
 
@@ -1227,15 +1323,13 @@ void filtrare_optiuni()
         else if (option == 3) filtrare_optiuni();
 
     }
-
-
 }
 
 
 void vezi_cazarileMele()
 {
 
-    system("cls");
+    Sleep(0.016666);  system("cls");
     fflush(stdin);
     printf("************************************************************************* MENIU - CAZARILE MELE *****************************************************************************\n\n");
     FILE* cazari = fopen("raport.txt", "r");
@@ -1268,7 +1362,7 @@ void vezi_cazarileMele()
 
     if (option == 1)
     {
-        system("cls");
+        Sleep(0.016666);  system("cls");
         return;
     }
 
@@ -1287,7 +1381,7 @@ int main() {
 
     while (1)
     {
-        system("cls");
+        Sleep(0.016666); system("cls");
         fflush(stdin);
         printf("***************************************************************************** MENIU PRINCIPAL *******************************************************************************\n\n");
 
@@ -1316,5 +1410,4 @@ int main() {
 
     }
     return 0;
-
 }
