@@ -1,0 +1,50 @@
+﻿  Source.c
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(165,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(173,46): warning C4013: 'utility_readUserOptionLogare' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(188,44): warning C4013: 'utility_readUserOption' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(195,23): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(214,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(228,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(239,40): warning C4013: 'utility_receiveIDForReview' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(243,47): warning C4013: 'utility_checkIDExistanceForReview' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(255,19): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(267,36): warning C4013: 'utility_findHotelByID' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(273,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(608,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(617,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(706,42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(719,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(756,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(779,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(872,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(883,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(899,23): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(919,23): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(930,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1133,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1148,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1157,37): warning C4013: 'utility_getIDForBooking' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1163,65): warning C4013: 'utility_checkAvailabilityAndExistanceForBookingByID' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1175,19): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1226,51): warning C4013: 'utility_getPersonsNumber' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1256,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1275,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1298,17): warning C4013: 'main' undefined; assuming extern returning int
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1284,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1325,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1391,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1431,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1439,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1453,20): warning C4133: 'function': incompatible types - from 'char [101]' to 'FILE *const '
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1455,19): warning C4133: 'function': incompatible types - from 'char [101]' to 'FILE *'
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1401,10): warning C4101: 'txt': unreferenced local variable
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1469,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1483,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1509,19): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1537,19): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1566,19): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1581,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\UtilityFunctions.h(1623,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\Source.c(14,11): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+C:\Users\Emanuel\Desktop\Proiect_Programare\Project1\Source.c(25,15): warning C4244: 'function': conversion from 'double' to 'DWORD', possible loss of data
+  Project1.vcxproj -> C:\Users\Emanuel\Desktop\Proiect_Programare\x64\Debug\Project1.exe
