@@ -974,17 +974,17 @@ void utility_generare_raport(int i)
 {
     Sleep(0.016666); system("cls");
 
-    printf("**************************************************** MENIUL DE GENERARE RAPORT DE CAZARE IN FORMAT TEXT *************************************************\n\n");
+    printf("\n\n\n\n\n**************************************************** MENIUL DE GENERARE RAPORT DE CAZARE IN FORMAT TEXT *************************************************\n\n");
 
-    printf("[1] Genereaza raport de cazare\n");
-    printf("[2] Revino la meniul principal\n");
-    printf("[3] Opreste Programul\n\n");
+    printf("\t\t\t\t\t\t\t[1] Genereaza raport de cazare\n");
+    printf("\t\t\t\t\t\t\t[2] Revino la meniul principal\n");
+    printf("\t\t\t\t\t\t\t[3] Opreste Programul\n\n");
 
     int option = utility_readUserOption();
 
     if (option == 1)
     {
-        printf("Se incepe generarea raportului de cazare...\n\n");
+        printf("\t\t\t\t\t\t\tSe incepe generarea raportului de cazare...\n\n");
         Sleep(4500);
 
         char Numeprs[101];
@@ -1029,7 +1029,7 @@ void utility_generare_raport(int i)
 
     else if (option == 3)  utility_exit();
 
-    printf("Raportul a fost generat, se poate gasi in format text, cazarea a fost facuta, vom redirectiona catre meniul principal. Multumim!");
+    printf("\t\t\t\t\t\t\tRaportul a fost generat, se poate gasi in format text, cazarea\n\t\t\t\t\t\t\ta fost facuta, vom redirectiona catre meniul principal. Multumim!");
     Sleep(4500);
     fflush(stdin);
     Sleep(0.016666); system("cls");
@@ -1055,7 +1055,7 @@ int utility_readUserOptionRaportOnline()
 
 void utility_vizualizare_raport_cazare(int poz, int persoane)
 {
-    printf("**************************************************************************** RAPORT DE CAZARE ONLINE ************************************************************************\n\n");
+    printf("**************************************************************************** RAPORT DE CAZARE ONLINE ************************************************************************\n\n\n\n\n");
 
     printf("\t\t\t\t\t\t\t    Ati ales:\n\n");
 
@@ -1087,7 +1087,7 @@ void utility_vizualizare_raport_cazare(int poz, int persoane)
     printf("\t\t\t\t\t\t\t    Disponibilitate: ");
     printf(locatie[poz].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-    printf("\t\t\t\t\t    ----------------------------------------------------------------------\n\n");
+    printf("\t\t\t\t\t    ----------------------------------------------------------------------\n\n\n\n\n");
 
     printf("***************************************************************************************************************************************************************************\n\n");
 
@@ -1183,13 +1183,13 @@ void rezerva_loc()
 {
     Sleep(0.016666); system("clS");
 
-    printf("************************************************************************** MENIU DE REZERVARE A LOCULUI *********************************************************************\n\n");
+    printf("\n\n\n\n\n************************************************************************** MENIU DE REZERVARE A LOCULUI *********************************************************************\n\n\n\n\n");
 
     printf("\t\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
     printf("\t\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
-    printf("\t\t\t\t\t\t\t\t\t    [3] Continuati\n\n");
+    printf("\t\t\t\t\t\t\t\t\t    [3] Continuati\n\n\n\n\n");
 
-    printf("*****************************************************************************************************************************************************************************\n\n");
+    printf("*****************************************************************************************************************************************************************************\n\n\n\n\n");
 
 
     int option = utility_readUserOption();
@@ -1207,7 +1207,7 @@ void rezerva_loc()
     printf("\n");
     int ID = utility_getIDForBooking();
     printf("\n");
-    printf("\t\t\t\t\t  Se verifica daca ID-ul corespunde unui hotel si disponibilitatea hotelului...\n\n");
+    printf("\t\t\t\t\t\t\t\t    Se verifica daca ID-ul corespunde unui\n\t\t\t\t\t\t\t\t    hotel si disponibilitatea hotelului...\n\n");
     Sleep(3500);
 
 
@@ -1215,9 +1215,9 @@ void rezerva_loc()
 
     if (ok == 3)
     {
-        printf("\t\t\t\t\t\t\t    ID-ul nu exista, verificati inca odata\n\n");
-        printf("\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
-        printf("\t\t\t\t\t\t\t    [2] Opreste Programul\n\n");
+        printf("\t\t\t\t\t\t\t\t    ID-ul nu exista, verificati inca odata\n\n");
+        printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n\n");
 
         int option = utility_readUserOptionIDHotel();
 
@@ -1233,46 +1233,46 @@ void rezerva_loc()
 
     else if (ok == 2)
     {
-        printf("\t\t\t\t\t\t\t    Hotelul nu este disponibil deocamdata\n");
-        printf("\t\t\t\t\t\t\t    Redirectionam catre pagina principala...");
+        printf("\t\t\t\t\t\t\t\t    Hotelul nu este disponibil deocamdata\n");
+        printf("\t\t\t\t\t\t\t\t    Redirectionam catre pagina principala...");
         Sleep(13000);
         return;
     }
 
     else
     {
-        printf("\t\t\t\t\t\t\t    Hotelul s-a gasit si este disponibil\n\n\n");
-        printf("\t\t\t\t\t\t\t    Ati ales:\n\n");
-        printf("\t\t\t\t    ----------------------------------------------------------------------\n\n");
-        printf("\t\t\t\t\t\t\t    Locatie: ");
+        printf("\t\t\t\t\t\t\t\t    Hotelul s-a gasit si este disponibil\n\n\n");
+        printf("\t\t\t\t\t\t\t\t    Ati ales:\n\n");
+        printf("\t\t\t\t\t\t\t\t    ----------------------------------------------------------------------\n\n");
+        printf("\t\t\t\t\t\t\t\t    Locatie: ");
         printf("%s", locatie[ID].numeLocatie);
 
-        printf("\t\t\t\t\t\t\t    Nume Hotel: ");
+        printf("\t\t\t\t\t\t\t\t    Nume Hotel: ");
         printf("%s", locatie[ID].numeHotel);
 
-        printf("\t\t\t\t\t\t\t    ID: ");
+        printf("\t\t\t\t\t\t\t\t    ID: ");
         printf("%i\n", locatie[ID].id);
 
-        printf("\t\t\t\t\t\t\t    Pret: ");
+        printf("\t\t\t\t\t\t\t\t    Pret: ");
         printf("%f\n", locatie[ID].pret);
 
-        printf("\t\t\t\t\t\t\t    Locuri Ramase: ");
+        printf("\t\t\t\t\t\t\t\t    Locuri Ramase: ");
         printf("%i\n", locatie[ID].locuriRamase);
 
-        printf("\t\t\t\t\t\t\t    Numar de stele: ");
+        printf("\t\t\t\t\t\t\t\t    Numar de stele: ");
         printf("%i\n", locatie[ID].evaluare);
 
-        printf("\t\t\t\t\t\t\t    Medie Review-uri: ");
+        printf("\t\t\t\t\t\t\t\t    Medie Review-uri: ");
         printf("%f\n", locatie[ID].mediePareri);
 
-        printf("\t\t\t\t\t\t\t    Numar de Review-uri: ");
+        printf("\t\t\t\t\t\t\t\t    Numar de Review-uri: ");
         printf("%i\n", locatie[ID].numarPareri);
 
-        printf("\t\t\t\t\t\t\t    Disponibilitate: ");
+        printf("\t\t\t\t\t\t\t\t    Disponibilitate: ");
         printf(locatie[ID].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-        printf("\t\t\t\t    ----------------------------------------------------------------------\n\n\n\n");
-        printf("\t\t\t\t\t\t\t    Directionam catre meniul de introducere a persoanelor...");
+        printf("\t\t\t\t\t\t\t\t    ----------------------------------------------------------------------\n\n\n\n");
+        printf("\t\t\t\t\t\t\t\t    Directionam catre meniul de introducere a persoanelor...");
         Sleep(10000);
         NumarDePersoane = utility_getPersonsNumber();
         poz = utility_findHotelByID(ID);
@@ -1280,8 +1280,8 @@ void rezerva_loc()
 
         if (check == 0)
         {
-            printf("\t\t\t\t\t\t\t    Nu sunt destule locuri disponibile\n");
-            printf("\t\t\t\t\t\t\t    Verificati din nou locurile disponibile, veti fi directionat la meniul principal");
+            printf("\t\t\t\t\t\t\t\t    Nu sunt destule locuri disponibile\n");
+            printf("\t\t\t\t\t\t\t\t    Verificati din nou locurile disponibile, veti fi directionat la meniul principal");
             Sleep(13000);
             return;
         }
@@ -1294,7 +1294,7 @@ void rezerva_loc()
             i++;
         }
 
-        printf("\t\t\t\t\t\t\t    Pregatim raportul de cazare...");
+        printf("\t\t\t\t\t\t\t\t    Pregatim raportul de cazare...");
         Sleep(5500); system("cls");
         utility_vizualizare_raport_cazare(poz, NumarDePersoane);
     }
@@ -1306,7 +1306,7 @@ int utility_getIDForBooking()
     char id[100];
     Sleep(0.016666); system("cls");
 
-    printf("********************************************************* MENIU DE REZERVARE A LOCULUI - SOLICITARE ID HOTEL*****************************************************************\n\n");
+    printf("********************************************************* MENIU DE REZERVARE A LOCULUI - SOLICITARE ID HOTEL*****************************************************************\n\n\n\n\n");
 
 
     printf("\t\t\t\t\t\t\t\t    Scrieti ID-ul hotelului: \n\n");
@@ -1612,7 +1612,7 @@ void vezi_cazarileMele()
 
     Sleep(0.016666);  system("cls");
     fflush(stdin);
-    printf("************************************************************************* MENIU - CAZARILE MELE *****************************************************************************\n\n");
+    printf("\n\n\n\n\n\n************************************************************************* MENIU - CAZARILE MELE *****************************************************************************\n\n");
     
     char Numeprs[101];
 
