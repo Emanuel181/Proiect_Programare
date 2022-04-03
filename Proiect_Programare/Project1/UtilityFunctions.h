@@ -1319,7 +1319,6 @@ int utility_getIDForBooking()
 
     printf("\t\t\t\t\t\t\t\t    Scrieti ID-ul hotelului: \n\n");
     printf("\t\t\t\t\t\t\t\t    ID: "); scanf("%s", &id);
-    getchar();
 
     int num = (log10(atoi(id)) + 1);
 
@@ -1349,7 +1348,7 @@ int utility_getIDForBooking()
         }
     }
 
-    return atoi(id);
+    return (atoi(id));
 }
 
 
@@ -1459,6 +1458,16 @@ void anuleaza_rezervare()
 
     }
 
+    fgets(txt, 248, cazari);
+    if (txt[0] == ' ')
+    {
+        printf("\t\t\t\t\t\t\t\t    Nu aveti nicio rezervare facuta\n\n");
+        printf("\t\t\t\t\t\t\t\t    Redirectionam spre meniul principal...");
+        Sleep(9000);
+        fclose(cazari);
+        return;
+    }
+
 
     fseek(cazari, 0, SEEK_END);
     int size = ftell(cazari);
@@ -1469,13 +1478,18 @@ void anuleaza_rezervare()
         Sleep(9000);
         fclose(cazari);
         return;
-    }
+    }  
+
+    printf("\n");
+
+    fclose(cazari);
     
     printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
     printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
     printf("\t\t\t\t\t\t\t\t    [3] Continua anularea rezervarii\n\n");
 
     int option = utility_readUserOptionAnuleazaCazare();
+    getchar();
 
     if (option == 1)
     {
@@ -1499,9 +1513,9 @@ void anuleaza_rezervare()
         strcpy(ptr, NumePersoana);
         strcat(ptr, ".txt");
 
-        FILE* cazare = fopen(ptr, "w+");
+        FILE* cazare = fopen(ptr, "w");
 
-        fprintf(cazare, "  ");
+        fprintf(cazare, " ");
 
         fclose(cazare);
 
