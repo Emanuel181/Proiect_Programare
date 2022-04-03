@@ -104,22 +104,36 @@ void utility_createAcc()
     system("cls");
     printf("************************************************************************** MENIU CREARE CONT ******************************************************************************\n\n\n\n");
 
-    char nume[101], pass[101];
+    char nume[101], pass[101], adresa[101], telefon[30];
 
     FILE* cont = fopen("conturi.txt", "a");
 
-    printf("\t\t\t\t\t\t    Nume de utilizator(in loc de spatii folositi \"-\" sau \"_\" ): "); scanf("%s", nume);
+    printf("\t\t\t\t\t\t    Nume de utilizator(in loc de spatii folositi \"-\" sau \"_\" ): "); scanf("%s", nume); getchar();
 
     printf("\n");
 
-    printf("\t\t\t\t\t\t\t\t\t    Parola(fara spatii): "); scanf("%s", pass);
+    printf("\t\t\t\t\t\t\t\t\t    Parola(fara spatii): "); scanf("%s", pass); getchar();
+
+    printf("\n");
+
+    printf("\t\t\t\t\t\t\t\t\t    adresa gmail: "); scanf("%s", adresa); getchar();
+
+    printf("\n");
+
+    printf("\t\t\t\t\t\t\t\t\t    numar de telefon: "); scanf("%s", telefon); getchar();
 
     fprintf(cont, "%s\n", nume);
-    fprintf(cont, "%s\n\n", pass);
+    fprintf(cont, "%s\n", pass);
+    fprintf(cont, "%s\n", adresa);
+    fprintf(cont, "%s\n", telefon);
+    fprintf(cont, "%s\n", pass);
+    fprintf(cont, "%s\n\n", nume);
 
     fclose(cont);
 
     strcpy(NumePersoana, nume);
+
+    return;
 
 }
 
@@ -176,6 +190,220 @@ int utility_intraInCont()
 }
 
 
+void gasireParola()
+{
+    printf("\n\n\t\t\t\t\t\t\t\t\t    [1] Mai stiu adresa\n");
+    printf("\t\t\t\t\t\t\t\t\t    [2] Mai stiu numarul de telefon\n");
+    printf("\t\t\t\t\t\t\t\t\t    [3] Nu mai stiu niciuna\n\n\n");
+
+    int option; 
+    printf("\t\t\t\t\t\t\t\t\t    Ce va mai amintiti?: "); scanf("%i", &option);
+
+    if (option == 1)
+    {
+        char adresa[101];
+
+        printf("\n\t\t\t\t\t\t\t\t\t    Scrieti adresa: "); scanf("%s", adresa);
+
+        printf("\n");
+
+        FILE* cont = fopen("conturi.txt", "r");
+
+        if (cont == NULL)
+        {
+            printf("\n\n\t\t\t\t    Utilizati aplicatia pentru prima data, nu exista conturi, redirectionam catre meniul de creare de cont...");
+            Sleep(7000);
+            utility_createAcc();
+        }
+
+        else
+        {
+            char check[101];
+
+            int ok = 0;
+
+            while (fgets(check, 101, cont))
+            {
+                check[strlen(check) - 1] = '\0';
+                if (strcmp(check, adresa) == 0)
+                {
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Parola este: %s", check);
+                    system("pause");
+                }
+            }
+        }
+   }
+
+    if (option == 2)
+    {
+        char adresa[101];
+
+        printf("\n\t\t\t\t\t\t\t\t\t    Scrieti numarul de telefon: "); scanf("%s", adresa);
+
+        printf("\n");
+
+        FILE* cont = fopen("conturi.txt", "r");
+
+        if (cont == NULL)
+        {
+            printf("\n\n\t\t\t\t    Utilizati aplicatia pentru prima data, nu exista conturi, redirectionam catre meniul de creare de cont...");
+            Sleep(7000);
+            utility_createAcc();
+        }
+
+        else
+        {
+            char check[101];
+
+            int ok = 0;
+
+            while (fgets(check, 101, cont))
+            {
+                check[strlen(check) - 1] = '\0';
+                if (strcmp(check, adresa) == 0)
+                {
+                    fgets(check, 101, cont);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Parola este: %s", check);
+                    system("pause");
+                }
+            }
+        }
+    }
+
+    else
+    {
+        printf("Contul este pierdut :(");
+        exit(0);
+    }
+
+}
+
+
+void gasireNumeUtilizator()
+{
+    printf("\n\n\t\t\t\t\t\t\t\t\t    [1] Mai stiu adresa\n");
+    printf("\t\t\t\t\t\t\t\t\t    [2] Mai stiu numarul de telefon\n");
+    printf("\t\t\t\t\t\t\t\t\t    [3] Mai stiu parola\n");
+    printf("\t\t\t\t\t\t\t\t\t    [4] Nu mai stiu niciuna\n\n\n");
+
+    int option;
+    printf("\t\t\t\t\t\t\t\t\t    Ce va mai amintiti?: "); scanf("%i", &option);
+
+    if (option == 1)
+    {
+        char adresa[101];
+
+        printf("\n\t\t\t\t\t\t\t\t\t    Scrieti adresa: "); scanf("%s", adresa);
+
+        printf("\n");
+
+        FILE* cont = fopen("conturi.txt", "r");
+
+        if (cont == NULL)
+        {
+            printf("\n\n\t\t\t\t    Utilizati aplicatia pentru prima data, nu exista conturi, redirectionam catre meniul de creare de cont...");
+            Sleep(7000);
+            utility_createAcc();
+        }
+
+        else
+        {
+            char check[101];
+
+            int ok = 0;
+
+            while (fgets(check, 101, cont))
+            {
+                check[strlen(check) - 1] = '\0';
+                if (strcmp(check, adresa) == 0)
+                {
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s", check);
+                    system("pause");
+                }
+            }
+        }
+    }
+
+    if (option == 2)
+    {
+        char adresa[101];
+
+        printf("\n\t\t\t\t\t\t\t\t\t    Scrieti numarul de telefon: "); scanf("%s", adresa);
+
+        printf("\n");
+
+        FILE* cont = fopen("conturi.txt", "r");
+
+        if (cont == NULL)
+        {
+            printf("\n\n\t\t\t\t    Utilizati aplicatia pentru prima data, nu exista conturi, redirectionam catre meniul de creare de cont...");
+            Sleep(7000);
+            utility_createAcc();
+        }
+
+        else
+        {
+            char check[101];
+
+            int ok = 0;
+
+            while (fgets(check, 101, cont))
+            {
+                check[strlen(check) - 1] = '\0';
+                if (strcmp(check, adresa) == 0)
+                {
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s", check);
+                    system("pause");
+                }
+            }
+        }
+    }
+
+    if (option == 3)
+    {
+        char adresa[101];
+
+        printf("\n\t\t\t\t\t\t\t\t\t    Scrieti parola: "); scanf("%s", adresa);
+
+        printf("\n");
+
+        FILE* cont = fopen("conturi.txt", "r");
+
+        if (cont == NULL)
+        {
+            printf("\n\n\t\t\t\t    Utilizati aplicatia pentru prima data, nu exista conturi, redirectionam catre meniul de creare de cont...");
+            Sleep(7000);
+            utility_createAcc();
+        }
+
+        else
+        {
+            char check[101];
+
+            int ok = 0;
+
+            while (fgets(check, 101, cont))
+            {
+                check[strlen(check) - 1] = '\0';
+                if (strcmp(check, adresa) == 0)
+                {
+                    fgets(check, 101, cont);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s", check);
+                    system("pause");
+                }
+            }
+        }
+    }
+
+}
+
 void utility_logare()
 {
     Sleep(0.016666); system("cls");
@@ -184,11 +412,28 @@ void utility_logare()
     printf("************************************************************************** MENIU CREARE CONT ********************************************************************************\n\n\n\n");
 
 
-    printf("\t\t\t\t\t\t\t\t\t    [1] Am cont\n\t\t\t\t\t\t\t\t\t    [2] Nu am cont\n\n");
+    printf("\t\t\t\t\t\t\t\t\t    [1] Am cont\n\t\t\t\t\t\t\t\t\t    [2] Nu am cont\n\t\t\t\t\t\t\t\t\t    [3] Am uitat parola\n\t\t\t\t\t\t\t\t\t    [4] Am uitat numele de utilizator\n\n\n");
 
     int option = utility_readUserOptionLogare();
 
-    if (option == 2) utility_createAcc();
+    if (option == 2)
+    {
+        utility_createAcc();
+        return;
+       
+    }
+
+    if (option == 3)
+    {
+        gasireParola();
+        exit(0);
+    }
+
+    if (option == 4)
+    {
+        gasireNumeUtilizator();
+        exit(0);
+    }
 
     else
     {
@@ -1681,6 +1926,16 @@ void filtrare_optiuni()
 }
 
 
+int utility_readUserOptionCazarileMele()
+{
+    int option;
+    printf("\t\t\t\t\t\t\t\t    Numarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
+
+
 void vezi_cazarileMele()
 {
 
@@ -1697,7 +1952,7 @@ void vezi_cazarileMele()
     char txt[250];
 
     if (NULL == cazari) {
-        printf("Nu aveti nicio rezervare facuta\n\n");
+        printf("\t\t\t\t\t\t\t\t    Nu aveti nicio rezervare facuta\n\n");
     }
 
     else
@@ -1705,7 +1960,7 @@ void vezi_cazarileMele()
         while (fgets(txt, 248, cazari)) {
             if (txt[0] == ' ')
             {
-                printf("Nu aveti nicio rezervare facuta\n\n");
+                printf("\t\t\t\t\t\t\t\t    Nu aveti nicio rezervare facuta\n\n");
                 break;
             }
             printf("%s\n", txt);
@@ -1718,10 +1973,10 @@ void vezi_cazarileMele()
 
     printf("\n\n");
 
-    printf("[1] Revino la meniul principal\n");
-    printf("[2] Opreste Programul\n\n");
+    printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+    printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n\n");
 
-    int option = utility_readUserOption();
+    int option = utility_readUserOptionCazarileMele();
 
     if (option == 1)
     {
