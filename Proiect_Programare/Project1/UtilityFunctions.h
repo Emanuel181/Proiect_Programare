@@ -22,7 +22,7 @@ void ClearScreen()
 
 void utility_welcome()
 {
-    printf("\n\n\n\n\n\t\t\t\t\t\t\t\t\t    Bine ai venit %s !\n\n\n\n", NumePersoana);
+    printf("\n\n\n\n\n\t\t\t\t\t\t\t\t\t  Bine ai venit %s !\n\n\n\n", NumePersoana);
 }
 
 
@@ -691,7 +691,7 @@ void utility_mainMenus()
     printf("                                                                            [5] Filtreaza optiuni\n");
     printf("                                                                            [6] Adauga un review\n");
     printf("                                                                            [7] Vezi cazarile mele\n");
-    printf("                                                                            [8] Oprire Program\n\n");
+    printf("                                                                            [8] Oprire Program\n\n\n\n\n");
 }
 
 
@@ -861,7 +861,7 @@ void utility_SitemDePlata()
         printf("\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
         printf("\t\t\t\t\t\t\t    [2] Reinitiaza plata\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionPlata();
 
         if (option == 1)
         {
@@ -969,18 +969,26 @@ void pareri_fosti_clienti()
     }
 }
 
+int utility_readUserOptionRaportText()
+{
+    int option;
+    printf("\t\t\t\t\t\t\tNumarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
 
 void utility_generare_raport(int i)
 {
     Sleep(0.016666); system("cls");
 
-    printf("\n\n\n\n\n**************************************************** MENIUL DE GENERARE RAPORT DE CAZARE IN FORMAT TEXT *************************************************\n\n");
+    printf("\n\n\n\n\n************************************************************* MENIUL DE GENERARE RAPORT DE CAZARE IN FORMAT TEXT *********************************************************\n\n\n\n");
 
     printf("\t\t\t\t\t\t\t[1] Genereaza raport de cazare\n");
     printf("\t\t\t\t\t\t\t[2] Revino la meniul principal\n");
     printf("\t\t\t\t\t\t\t[3] Opreste Programul\n\n");
 
-    int option = utility_readUserOption();
+    int option = utility_readUserOptionRaportText();
 
     if (option == 1)
     {
@@ -1418,11 +1426,21 @@ int utility_checkIDExistanceForReview(int ID)
 }
 
 
+int utility_readUserOptionAnuleazaCazare()
+{
+    int option;
+    printf("\t\t\t\t\t\t\t\t    Numarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
+
+
 void anuleaza_rezervare()
 {
     Sleep(0.016666); system("clS");
 
-    printf("************************************************************************ MENIUL DE ANULAT REZERVAREA ************************************************************************\n\n");
+    printf("\n\n\n************************************************************************ MENIUL DE ANULAT REZERVAREA ************************************************************************\n\n\n\n\n");
 
     char ptr[101];
 
@@ -1433,9 +1451,10 @@ void anuleaza_rezervare()
     char txt[250];
 
     if (NULL == cazari) {
-        printf("Nu aveti nicio cazare facuta\n");
-        printf("Redirectionam spre meniul principal...");
+        printf("\t\t\t\t\t\t\t\t    Nu aveti nicio cazare facuta\n");
+        printf("\t\t\t\t\t\t\t\t    Redirectionam spre meniul principal...");
         Sleep(9000);
+        fclose(cazari);
         return;
 
     }
@@ -1445,18 +1464,18 @@ void anuleaza_rezervare()
     int size = ftell(cazari);
 
     if (0 == size) {
-        printf("Nu aveti nicio rezervare facuta\n\n");
-        printf("Redirectionam catre pagina principala...");
+        printf("\t\t\t\t\t\t\t\t    Nu aveti nicio rezervare facuta\n\n");
+        printf("\t\t\t\t\t\t\t\t    Redirectionam catre pagina principala...");
         Sleep(9000);
+        fclose(cazari);
         return;
     }
+    
+    printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+    printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
+    printf("\t\t\t\t\t\t\t\t    [3] Continua anularea rezervarii\n\n");
 
-
-    printf("[1] Revino la meniul principal\n");
-    printf("[2] Opreste Programul\n");
-    printf("[3] Continua anularea rezervarii\n\n");
-
-    int option = utility_readUserOption();
+    int option = utility_readUserOptionAnuleazaCazare();
 
     if (option == 1)
     {
@@ -1480,16 +1499,16 @@ void anuleaza_rezervare()
         strcpy(ptr, NumePersoana);
         strcat(ptr, ".txt");
 
-        FILE* cazare = fopen(ptr, "w");
+        FILE* cazare = fopen(ptr, "w+");
 
-        fprintf(ptr, "  ");
+        fprintf(cazare, "  ");
 
-        fclose(ptr);
+        fclose(cazare);
 
-        printf("Cazarea a fost anulata, banii vor fi restituti cat de curand\n");
-        printf("Redirectionam catre meniul principal...\n");
+        printf("\t\t\t\t\t\t\t\t    Cazarea a fost anulata, banii vor fi restituti cat de curand\n");
+        printf("\t\t\t\t\t\t\t\t    Redirectionam catre meniul principal...\n");
         Sleep(3500);
-        main();
+        return;
 
     }
 
