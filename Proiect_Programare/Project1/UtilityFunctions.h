@@ -219,8 +219,8 @@ void utility_logare()
 void utility_ReviewMenu()
 {
     system("cls");
-    printf("Multumim ca doriti sa ajutati comunitatea !\n\n");
-    printf("Pregatim pagina de adaugat pareri...");
+    printf("\n\n\t\t\t\t\t\t    Multumim ca doriti sa ajutati comunitatea !\n\n");
+    printf("\t\t\t\t\t\t    Pregatim pagina de adaugat pareri...");
     Sleep(4500);
 }
 
@@ -239,6 +239,15 @@ void utility_exit()
 }
 
 
+int utility_readUserOptionAdaugaParere()
+{
+    int option;
+    printf("\t\t\t\t\t\t\t\t\t    Numarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
+
 void adauga_parere()
 {
     Sleep(0.016666);  system("cls");
@@ -251,7 +260,7 @@ void adauga_parere()
     float mark;
     int poz;
 
-    printf("ID-ul hotelului: ");
+    //printf("\t\t\t\t\t\t\t\t\t    ID-ul hotelului: ");
     int ID = utility_receiveIDForReview();
 
     printf("\n");
@@ -260,11 +269,11 @@ void adauga_parere()
 
     if (ok == 2)
     {
-        printf("ID-ul nu exista, verificati inca odata\n\n");
-        printf("[1] Revino la meniul principal\n");
-        printf("[2] Opreste Programul\n\n");
+        printf("\t\t\t\t\t\t    ID-ul nu exista, verificati inca odata\n\n");
+        printf("\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t    [2] Opreste Programul\n\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionAdaugaParere();
 
         if (option == 1)
         {
@@ -278,55 +287,55 @@ void adauga_parere()
 
     else
     {
-        printf("Hotelul s-a gasit! \n\n");
+        printf("\t\t\t\t\t\t    Hotelul s-a gasit! \n\n");
         printf("\n");
         poz = utility_findHotelByID(ID);
     }
 
-    printf("Redirectionam catre pagina de adaugat pareri...");
+    printf("\t\t\t\t\t\t    Redirectionam catre pagina de adaugat pareri...");
     Sleep(4500);
     utility_ReviewMenu(poz);
     Sleep(0.016666);  system("cls");
-    printf("Puteti inncepe: \n\n");
+    printf("\n\n\t\t\t\t\t\t    Puteti inncepe: \n\n");
 
-    printf("Numele locatiei: ");
+    printf("\t\t\t\t\t\t    Numele locatiei: ");
     strcpy(parere[cntPareri].Locatie, locatie[poz].numeLocatie);
     printf("%s\n", parere[cntPareri].Locatie);
 
-    printf("Numele Hotelului: ");
+    printf("\t\t\t\t\t\t    Numele Hotelului: ");
     strcpy(parere[cntPareri].Hotel, locatie[poz].numeHotel);
     printf("%s\n", parere[cntPareri].Hotel);
 
-    printf("Numele tau: ");
+    printf("\t\t\t\t\t\t    Numele tau : ");
     scanf("%s", var);
     var[strlen(var) + 1] = '\0';
     strcpy(parere[cntPareri].numePrenume, var);
     printf("\n");
     while ((getchar()) != '\n');
 
-    printf("Parerea ta: ");
+    printf("\t\t\t\t\t\t    Parerea ta: ");
     fgets(text, 400, stdin);
     strcpy(parere[cntPareri].txt, text);
     printf("\n");
 
 
-    printf("Nota: ");
+    printf("\t\t\t\t\t\t    Nota: ");
     scanf("%f", &mark);
     parere[cntPareri].nota = mark;
     printf("\n\n");
 
 
-    printf("Review-ul dumneavoastra a fost adaugat. Multumim !\n\n");
-    printf("[1] Adaugati alt review\n");
-    printf("[2] Reveniti la meniul principal\n\n");
+    printf("\t\t\t\t\t\t    Review-ul dumneavoastra a fost adaugat. Multumim !\n\n");
+    printf("\t\t\t\t\t\t    [1] Adaugati alt review\n");
+    printf("\t\t\t\t\t\t    [2] Reveniti la meniul principal\n\n");
 
-    int option = utility_readUserOption();
+    int option = utility_readUserOptionAdaugaParere();
 
     if (option == 1) adauga_parere();
 
     else
     {
-        printf("Redirectionam catre meniul principal...");
+        printf("\n\n\t\t\t\t\t\t    Redirectionam catre meniul principal...");
         Sleep(4500);
     }
 }
@@ -379,6 +388,8 @@ void utility_printLocations()
 
 void utility_printLocationsByLocationName(char arg[])
 {
+    int check = 0;
+
     for (int i = 0; i < cntHoteluri; i++)
     {
         int ok = 1;
@@ -393,119 +404,132 @@ void utility_printLocationsByLocationName(char arg[])
 
         if (ok == 1)
         {
-            printf("---------------------------------------\n\n");
-            printf("Locatie: ");
+            check = 1;
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    Locatie: ");
             printf("%s", locatie[i].numeLocatie);
 
-            printf("Nume Hotel: ");
+            printf("\t\t\t\t\t\t\t\t    Nume Hotel: ");
             printf("%s", locatie[i].numeHotel);
 
-            printf("ID: ");
+            printf("\t\t\t\t\t\t\t\t    ID: ");
             printf("%i\n", locatie[i].id);
 
-            printf("Pret: ");
+            printf("\t\t\t\t\t\t\t\t    Pret: ");
             printf("%f\n", locatie[i].pret);
 
-            printf("Locuri Ramase: ");
+            printf("\t\t\t\t\t\t\t\t    Locuri Ramase: ");
             printf("%i\n", locatie[i].locuriRamase);
 
-            printf("Numar de stele: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de stele: ");
             printf("%i\n", locatie[i].evaluare);
 
-            printf("Medie Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Medie Review-uri: ");
             printf("%f\n", locatie[i].mediePareri);
 
-            printf("Numar de Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de Review-uri: ");
             printf("%i\n", locatie[i].numarPareri);
 
-            printf("Disponibilitate: ");
+            printf("\t\t\t\t\t\t\t\t    Disponibilitate: ");
             printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-            printf("---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
         }
     }
+
+    if (check == 0) printf("Nu exista hoteluri in aceasta locatie\n\n\n\n");
 
 }
 
 
 void utility_printLocationsByReviewsNumber(int num)
 {
+    int check = 0;
+
     for (int i = 0; i < cntHoteluri; i++)
     {
         if (locatie[i].numarPareri >= num)
         {
-            printf("---------------------------------------\n\n");
-            printf("Locatie: ");
+            check = 1;
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    Locatie: ");
             printf("%s", locatie[i].numeLocatie);
 
-            printf("Nume Hotel: ");
+            printf("\t\t\t\t\t\t\t\t    Nume Hotel: ");
             printf("%s", locatie[i].numeHotel);
 
-            printf("ID: ");
+            printf("\t\t\t\t\t\t\t\t    ID: ");
             printf("%i\n", locatie[i].id);
 
-            printf("Pret: ");
+            printf("\t\t\t\t\t\t\t\t    Pret: ");
             printf("%f\n", locatie[i].pret);
 
-            printf("Locuri Ramase: ");
+            printf("\t\t\t\t\t\t\t\t    Locuri Ramase: ");
             printf("%i\n", locatie[i].locuriRamase);
 
-            printf("Numar de stele: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de stele: ");
             printf("%i\n", locatie[i].evaluare);
 
-            printf("Medie Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Medie Review-uri: ");
             printf("%f\n", locatie[i].mediePareri);
 
-            printf("Numar de Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de Review-uri: ");
             printf("%i\n", locatie[i].numarPareri);
 
-            printf("Disponibilitate: ");
+            printf("\t\t\t\t\t\t\t\t    Disponibilitate: ");
             printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-            printf("---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
         }
     }
+
+    if (check == 0) printf("\t\t\t\t\t\t\t\t    Nu exista hoteluri cu acest numar minim de pareri\n\n\n\n");
 
 }
 
 
 void utility_printLocationsByMean(int num)
 {
+    int check = 0;
+
     for (int i = 0; i < cntHoteluri; i++)
     {
         if ((int)((locatie[i].mediePareri)) >= num)
         {
-            printf("---------------------------------------\n\n");
-            printf("Locatie: ");
+            check = 1;
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    Locatie: ");
             printf("%s", locatie[i].numeLocatie);
 
-            printf("Nume Hotel: ");
+            printf("\t\t\t\t\t\t\t\t    Nume Hotel: ");
             printf("%s", locatie[i].numeHotel);
 
-            printf("ID: ");
+            printf("\t\t\t\t\t\t\t\t    ID: ");
             printf("%i\n", locatie[i].id);
 
-            printf("Pret: ");
+            printf("\t\t\t\t\t\t\t\t    Pret: ");
             printf("%f\n", locatie[i].pret);
 
-            printf("Locuri Ramase: ");
+            printf("\t\t\t\t\t\t\t\t    Locuri Ramase: ");
             printf("%i\n", locatie[i].locuriRamase);
 
-            printf("Numar de stele: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de stele: ");
             printf("%i\n", locatie[i].evaluare);
 
-            printf("Medie Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Medie Review-uri: ");
             printf("%f\n", locatie[i].mediePareri);
 
-            printf("Numar de Review-uri: ");
+            printf("\t\t\t\t\t\t\t\t    Numar de Review-uri: ");
             printf("%i\n", locatie[i].numarPareri);
 
-            printf("Disponibilitate: ");
+            printf("\t\t\t\t\t\t\t\t    Disponibilitate: ");
             printf(locatie[i].disponibilitate == 0 ? "Nu mai este disponibil\n\n" : "Este disponibil\n\n");
 
-            printf("---------------------------------------\n\n");
+            printf("\t\t\t\t\t\t\t\t    ---------------------------------------\n\n");
         }
     }
+
+    if (check == 0) printf("\t\t\t\t\t\t\t\t    Nu exista hoteluri cu aceasta medie minima\n\n\n\n");
 
 }
 
@@ -639,9 +663,6 @@ void utility_storeLocationsData()
             locatie[cntHoteluri].disponibilitate = atoi(var);
         }
     }
-
-    // utility_printData(cnt);
-
 }
 
 
@@ -1352,12 +1373,22 @@ int utility_getIDForBooking()
 }
 
 
+int utility_readUserOptionGetIDReview()
+{
+    int option;
+    printf("\t\t\t\t\t\t\t\t\t    Numarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
+
+
 int utility_receiveIDForReview()
 {
     char id[100];
 
-    printf("Scrieti ID-ul hotelului pentru care vreti sa faceti review-ul\n\n");
-    printf("ID: "); scanf("%s", &id);
+    printf("\t\t\t\t\t\t    Scrieti ID-ul hotelului pentru care vreti sa faceti review-ul\n\n");
+    printf("\t\t\t\t\t\t    ID: "); scanf("%s", &id);
 
     getchar();
 
@@ -1366,12 +1397,12 @@ int utility_receiveIDForReview()
     if (num != strlen(id))
     {
         system("cls");
-        printf("Acesta nu este un ID valid !\n\n");
-        printf("[1] Revino la meniul principal\n");
-        printf("[2] Opreste Programul\n");
-        printf("[3] Reintrodu ID-ul\n\n");
+        printf("\t\t\t\t\t\t    Acesta nu este un ID valid !\n\n");
+        printf("\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t    [2] Opreste Programul\n");
+        printf("\t\t\t\t\t\t    [3] Reintrodu ID-ul\n\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionGetIDReview();
 
         if (option == 1)
         {
@@ -1382,7 +1413,7 @@ int utility_receiveIDForReview()
 
         else
         {
-            printf("Reincepem procesul...\n\n");
+            printf("\t\t\t\t\t\t    Reincepem procesul...\n\n");
 
             Sleep(3500);
             adauga_parere();
@@ -1529,18 +1560,28 @@ void anuleaza_rezervare()
 }
 
 
+int utility_readUserOptionFiltrare()
+{
+    int option;
+    printf("\t\t\t\t\t\t\t\t    Numarul actiunii: ");
+    scanf("%i", &option);
+
+    return option;
+}
+
+
 void filtrare_optiuni()
 {
     Sleep(0.016666);  system("cls");
     fflush(stdin);
-    printf("************************************************************************** MENIU - CAUTARE LOCATII **************************************************************************\n\n");
-    printf("[1] Revino la meniul principal\n");
-    printf("[2] Opreste Programul\n");
-    printf("[3] Cauta dupa locatie\n");
-    printf("[4] Cauta dupa numar de review-uri\n");
-    printf("[5] Cauta de la o anumita medie in sus\n\n");
+    printf("\n\n\n************************************************************************** MENIU - CAUTARE LOCATII **************************************************************************\n\n\n\n\n");
+    printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+    printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
+    printf("\t\t\t\t\t\t\t\t    [3] Cauta dupa locatie\n");
+    printf("\t\t\t\t\t\t\t\t    [4] Cauta dupa numar de review-uri\n");
+    printf("\t\t\t\t\t\t\t\t    [5] Cauta de la o anumita medie in sus\n\n");
 
-    int option = utility_readUserOption();
+    int option = utility_readUserOptionFiltrare();
     getchar();
 
     if (option == 1)
@@ -1554,7 +1595,7 @@ void filtrare_optiuni()
     else if (option == 3)
     {
         char name[150];
-        printf("Numele Locatiei: ");  scanf("%s", name);
+        printf("\t\t\t\t\t\t\t\t    Numele Locatiei: ");  scanf("%s", name);
         printf("\n\n");
         utility_printLocationsByLocationName(name);
         printf("\n\n");
@@ -1562,11 +1603,11 @@ void filtrare_optiuni()
         printf("*****************************************************************************************************************************************************\n\n");
 
 
-        printf("[1] Revino la meniul principal\n");
-        printf("[2] Opreste Programul\n");
-        printf("[3] Inapoi la criteriile de cautare\n\n");
+        printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
+        printf("\t\t\t\t\t\t\t\t    [3] Inapoi la criteriile de cautare\n\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionFiltrare();
         printf("\n\n");
 
         if (option == 1)
@@ -1583,7 +1624,7 @@ void filtrare_optiuni()
     else if (option == 4)
     {
         int num;
-        printf("Numarul minim de review-uri: "); scanf("%i", &num);
+        printf("\t\t\t\t\t\t\t\t    Numarul minim de review-uri: "); scanf("%i", &num);
 
         printf("\n\n");
         utility_printLocationsByReviewsNumber(num);
@@ -1591,11 +1632,11 @@ void filtrare_optiuni()
         printf("*****************************************************************************************************************************************************\n\n");
 
 
-        printf("[1] Revino la meniul principal\n");
-        printf("[2] Opreste Programul\n");
-        printf("[3] Inapoi la criteriile de cautare\n\n");
+        printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
+        printf("\t\t\t\t\t\t\t\t    [3] Inapoi la criteriile de cautare\n\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionFiltrare();
 
         if (option == 1)
         {
@@ -1612,7 +1653,7 @@ void filtrare_optiuni()
     else if (option == 5)
     {
         int medie;
-        printf("Media minima: "); scanf("%i", &medie);
+        printf("\t\t\t\t\t\t\t\t    Media minima: "); scanf("%i", &medie);
         printf("\n\n");
         utility_printLocationsByMean(medie);
         printf("\n\n");
@@ -1620,11 +1661,11 @@ void filtrare_optiuni()
         printf("*****************************************************************************************************************************************************\n\n");
 
 
-        printf("[1] Revino la meniul principal\n");
-        printf("[2] Opreste Programul\n");
-        printf("[3] Inapoi la criteriile de cautare\n\n");
+        printf("\t\t\t\t\t\t\t\t    [1] Revino la meniul principal\n");
+        printf("\t\t\t\t\t\t\t\t    [2] Opreste Programul\n");
+        printf("\t\t\t\t\t\t\t\t    [3] Inapoi la criteriile de cautare\n\n");
 
-        int option = utility_readUserOption();
+        int option = utility_readUserOptionFiltrare();
 
         if (option == 1)
         {
