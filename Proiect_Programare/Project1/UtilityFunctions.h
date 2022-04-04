@@ -12,60 +12,6 @@ int cntPareri, cntHoteluri, NumarDePersoane;
 char NumePersoana[101];
 
 
-void ClearScreen()
-{
-    COORD cursorPosition;	cursorPosition.X = 0;	cursorPosition.Y = 0;	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
-}
-
-
-
-
-void utility_welcome()
-{
-    printf("\n\n\n\n\n\t\t\t\t\t\t\t\t\t  Bine ai venit %s !\n\n\n\n", NumePersoana);
-}
-
-
-void utility_loadingScreen()
-{
-    printf("\n\n\n\n\n\n\n\n");
-    system("color 0A");
-
-    printf("******************************************************************** PROIECT - APLICATIE DE TURISM **************************************************************************\n\n\n\n");
-    printf("                                                                              RUSU EMANUEL\n\n\n\n");
-    system("color 0A");
-
-    // Initialize char for printing
-    // loading bar
-    char a = 177, b = 219;
-
-    printf("\n\n\n\t\t\t\t\t\t\t\t\t       Loading...\n\n");
-    printf("\t\t\t\t\t");
-
-    // Print initial loading bar
-    for (int i = 0; i < 80; i++)
-        printf("%c", a);
-
-    // Set the cursor again starting
-    // point of loading bar
-    printf("\r");
-    printf("\t\t\t\t\t");
-
-    // Print loading bar progress
-    for (int i = 0; i < 80; i++) {
-        printf("%c", b);
-
-        // Sleep for 1 second
-        Sleep(170);
-    }
-
-    printf("\n\n\n\n");
-
-    printf("*****************************************************************************************************************************************************************************\n\n\n");
-
-    printf("Finalizam imediat, se pregateste meniul de logare...");
-    Sleep(7500);
-}
 struct datelocatii {
     char numeLocatie[151];
     char numeHotel[101];
@@ -97,6 +43,94 @@ struct persoana
 
 
 struct persoana* head = NULL;
+
+
+void adauga_locatii()
+{
+    Sleep(0.016666);  system("clS");
+    printf("******************************************************************** MENIU DE ADAUGAT LOCATII - ADMIN ONLY ******************************************************************\n\n\n\n");
+    char var[151];
+
+    printf("\t\t\t\t\t\t\t\t\t     Numele locatiei: "); scanf("%s", var);
+    printf("\n");
+
+    printf("\t\t\t\t\t\t\t\t\t     Numele hotelului: "); scanf("%s", var);
+    printf("\n");
+    strcpy(locatie[cntHoteluri].numeHotel, var);
+
+    printf("\t\t\t\t\t\t\t\t\t     ID: %i", cntHoteluri);
+    printf("\n\n");
+    locatie[cntHoteluri].id = cntHoteluri;
+
+    printf("\t\t\t\t\t\t\t\t\t     Pretul pe noapte: "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].pret = atof(var);
+
+    printf("\t\t\t\t\t\t\t\t\t     Locuri ramase: "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].locuriRamase = atoi(var);
+
+    printf("\t\t\t\t\t\t\t\t\t     Numar de stele: "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].evaluare = atoi(var);
+
+    printf("\t\t\t\t\t\t\t\t\t     Medie pareri clienti: "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].mediePareri = atof(var);
+
+    printf("\t\t\t\t\t\t\t\t\t     Numarul de pareri: "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].numarPareri = atoi(var);
+
+    printf("\t\t\t\t\t\t\t\t\t     Disponibilitate (1 sau 0): "); scanf("%s", var);
+    printf("\n");
+    locatie[cntHoteluri].disponibilitate = atoi(var);
+
+    ++cntHoteluri;
+
+}
+
+
+void utility_welcome()
+{
+    printf("\n\n\n\n\n\t\t\t\t\t\t\t\t\t  Bine ai venit %s !\n\n\n\n", NumePersoana);
+}
+
+
+void utility_loadingScreen()
+{
+    printf("\n\n\n\n\n\n\n\n");
+    system("color 0A");
+
+    printf("******************************************************************** PROIECT - APLICATIE DE TURISM **************************************************************************\n\n\n\n");
+    printf("                                                                              RUSU EMANUEL\n\n\n\n");
+    system("color 0A");
+
+    char a = 177, b = 219;
+
+    printf("\n\n\n\t\t\t\t\t\t\t\t\t       Loading...\n\n");
+    printf("\t\t\t\t\t");
+
+
+    for (int i = 0; i < 80; i++)
+        printf("%c", a);
+
+    printf("\r");
+    printf("\t\t\t\t\t");
+
+
+    for (int i = 0; i < 80; i++) {
+        printf("%c", b);
+        Sleep(170);
+    }
+
+    printf("\n\n\n\n");
+
+    printf("*****************************************************************************************************************************************************************************\n\n\n");
+
+    printf("Finalizam imediat, se pregateste meniul de logare...");
+    Sleep(7500);
+}
 
 
 void utility_createAcc()
@@ -322,8 +356,9 @@ void gasireNumeUtilizator()
                     fgets(check, 101, cont);
                     fgets(check, 101, cont);
                     fgets(check, 101, cont);
-                    printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s", check);
+                    printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s\n", check);
                     system("pause");
+                    printf("\n\n");
                 }
             }
         }
@@ -394,6 +429,9 @@ void gasireNumeUtilizator()
                 check[strlen(check) - 1] = '\0';
                 if (strcmp(check, adresa) == 0)
                 {
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
+                    fgets(check, 101, cont);
                     fgets(check, 101, cont);
                     printf("\n\t\t\t\t\t\t\t\t\t    Numele de utilizator este: %s", check);
                     system("pause");
@@ -595,10 +633,10 @@ void utility_printLocations()
             Sleep(2500);
             printf("                           -----------------------------------------------------------------\n\n");
             printf("                                        Locatie: ");
-            printf("%s", locatie[i].numeLocatie);
+            printf("%s\n", locatie[i].numeLocatie);
 
             printf("                                        Nume Hotel: ");
-            printf("%s", locatie[i].numeHotel);
+            printf("%s\n", locatie[i].numeHotel);
 
             printf("                                        ID: ");
             printf("%i\n", locatie[i].id);
@@ -957,7 +995,8 @@ void utility_mainMenus()
     printf("                                                                            [5] Filtreaza optiuni\n");
     printf("                                                                            [6] Adauga un review\n");
     printf("                                                                            [7] Vezi cazarile mele\n");
-    printf("                                                                            [8] Oprire Program\n\n\n\n\n");
+    printf("                                                                            [8] Adauga locatii [ ADMIN ONLY ]\n");
+    printf("                                                                            [9] Oprire Program\n\n\n\n\n");
 }
 
 
@@ -1092,7 +1131,7 @@ int utility_readUserOptionPlata()
 
 void utility_SitemDePlata()
 {
-    system("cls");
+    Sleep(0.016666);  system("clS");
     fflush(stdin);
 
     printf("**************************************************************************** MENIUL DE PLATA ********************************************************************************\n\n\n\n");
