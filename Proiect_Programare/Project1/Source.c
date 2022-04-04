@@ -25,14 +25,14 @@ int main()
         Sleep(0.016666); system("cls");
         fflush(stdin);
         utility_welcome();
-        printf("\n***************************************************************************** MENIU PRINCIPAL *******************************************************************************\n\n");
+        printf("\n***************************************************************************** MENIU PRINCIPAL *******************************************************************************\n\n\n\n\n");
 
         utility_mainMenus();
 
         printf("\n");
-        printf("*****************************************************************************************************************************************************************************\n\n");
+        printf("*****************************************************************************************************************************************************************************\n\n\n\n\n");
 
-        int option = utility_readUserOptionMeniuPrincipal();
+        int option = utility_readUserOptionMeniuPrincipal(); getchar();
 
         if (option == 1) optiuniLocatii();
 
@@ -48,7 +48,9 @@ int main()
 
         else if (option == 7) vezi_cazarileMele();
 
-        else if (option == 8) utility_exit();
+        else if (option == 8) adauga_locatii();
+
+        else if (option == 9) utility_exit();
 
     }
     return 0;
