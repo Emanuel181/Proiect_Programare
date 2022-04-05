@@ -9,7 +9,7 @@
 
 
 int cntPareri, cntHoteluri, NumarDePersoane;
-char NumePersoana[101];
+char NumePersoana[101], dataCazare[255];
 
 
 struct datelocatii {
@@ -1318,6 +1318,7 @@ void utility_generare_raport(int i)
         }
 
         fprintf(cazare, "*****************************\n");
+        fprintf(cazare, "In data de: %s\n", dataCazare);
         fprintf(cazare, "Locatie: %s", locatie[i].numeLocatie);
         fprintf(cazare, "Nume Hotel: %s", locatie[i].numeHotel);
         fprintf(cazare, "ID: %i\n", locatie[i].id);
@@ -1373,6 +1374,8 @@ void utility_vizualizare_raport_cazare(int poz, int persoane)
     printf("\t\t\t\t\t\t\t    Ati ales:\n\n");
 
     printf("\t\t\t\t\t    ----------------------------------------------------------------------\n\n");
+    printf("\t\t\t\t\t\t\t    In data de: "); 
+    printf("%s\n", dataCazare);
     printf("\t\t\t\t\t\t\t    Locatie: ");
     printf("%s", locatie[poz].numeLocatie);
 
@@ -1606,7 +1609,8 @@ void rezerva_loc()
             utility_adaugaPersoana();
             i++;
         }
-
+        printf("\t\t\t\t\t\t\t    Scrieti data in format calendaristic: "); scanf("%s", dataCazare);
+        printf("\n");
         printf("\t\t\t\t\t\t\t\t    Pregatim raportul de cazare...");
         Sleep(5500); system("cls");
         utility_vizualizare_raport_cazare(poz, NumarDePersoane);
