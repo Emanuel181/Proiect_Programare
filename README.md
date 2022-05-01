@@ -27,10 +27,13 @@
 - [x] The posibility to create accounts
 - [x] The posibility to recover an account
 - [x] Validation for credit card (IBAN, CVV) - Luhn algorithm
-- [x] A complex project
+- [x] A very complex project
 - [x] Plenty of features
 - [x] Nice interface
 - [x] Databases for locations, reviews and users accounts  
+- [x] Used linked list and dynamic memory allocation 
+- [x] The posibility to add new locations
+- [x] The posibility to add a review for a hotel
 
 
 ### Image - How it works
