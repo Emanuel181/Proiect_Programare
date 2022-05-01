@@ -17,7 +17,6 @@
 
 - **If you are using other sotfware** you should search for ```Source.c``` by following the path ```Proiect_Programare/Project1/Source.c``` and you will probably need to manage the extra headers files defined by me by yourself in order to run the project. It was created in ```Microsoft Visual Studio IDE``` so opening it with another IDE or text editor may require extra work to set all files correctly. The most simple and efficient way is to use **```Microsoft Visual Studio IDE```**.
 
-
 <hr>
 <br>
 <br>
@@ -35,6 +34,9 @@
 - [x] The posibility to add new locations
 - [x] The posibility to add a review for a hotel
 
+<hr>
+<br>
+<br>
 
 ### Image - How it works
 <br>
