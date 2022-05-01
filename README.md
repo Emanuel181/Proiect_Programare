@@ -13,7 +13,7 @@
 <br>
 <br>
 **```[2]```**
-- **If you are using Visual Studio Comunity** you can open the project automatically from here in the ```Code``` section, press ```Open with Visual Studio```
+- **If you are using Microsoft Visual Studio IDE** you can open the project automatically from here, in the ```Code``` section, press ```Open with Visual Studio``` and then search for **```Project1.sln```** (main file). Or you can downlad this repository and open it with ```Microsoft Visual Studio IDE```
 
 ## How to stop it <img height="32" width="32" src = "https://user-images.githubusercontent.com/92999481/166147125-13fcae78-ff07-4943-b808-2f28cebff777.png">
 
