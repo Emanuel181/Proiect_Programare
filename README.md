@@ -22,6 +22,17 @@
 <br>
 <br>
 
+## Core aspects <img height="52" width="52" src = "https://user-images.githubusercontent.com/92999481/166150746-71e05c9b-3ef1-4179-b659-dbfcf0629fea.png">
+- [x] Loading screen
+- [x] The posibility to create accounts
+- [x] The posibility to recover an account
+- [x] Validation for credit card (IBAN, CVV) - Luhn algorithm
+- [x] A complex project
+- [x] Plenty of features
+- [x] Nice interface
+- [x] Databases for locations, reviews and users accounts  
+
+
 ### Image - How it works
 <br>
 <br>
