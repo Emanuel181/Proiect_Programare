@@ -13,7 +13,7 @@
 <br>
 <br>
 **```[2]```**
-- **If you are using Microsoft Visual Studio IDE (recommended way)** you can open the project automatically from here, in the ```Code``` section, press ```Open with Visual Studio``` and then search for **```Project1.sln```** (main file). Or you can downlad this repository and open it with ```Microsoft Visual Studio IDE```.
+- **If you are using Microsoft Visual Studio IDE (recommended way)** you can open the project automatically from here, in the ```Code``` section, press ```Open with Visual Studio``` and then search for **```Project1.sln```** (main file). Or you can downlad this repository and open it with ```Microsoft Visual Studio IDE```. Or you can clone it using ```https://github.com/Emanuel181/Proiect_Programare.git```.
 
 - **If you are using other sotfware** you should search for ```Source.c``` by following the path ```Proiect_Programare/Project1/Source.c``` and you will probably need to manage the extra headers files defined by me by yourself in order to run the project. It was created in ```Microsoft Visual Studio IDE``` so opening it with another IDE or text editor may require extra work to set all files correctly. The most simple and efficient way is to use **```Microsoft Visual Studio IDE```**.
 
